@@ -191,5 +191,42 @@
       "title": "Descubre por qué los equipos cambian a Plane",
       "description": "Compara Plane con las herramientas que usas hoy y ve la diferencia."
     }
+  },
+  "welcome_modal": {
+    "title": "Bienvenido a Plane, {name}",
+    "description": "Nos alegra que hayas decidido probar Plane. Ahora puedes gestionar tus proyectos con facilidad. Empieza creando un proyecto.",
+    "take_tour": "Hacer el recorrido del producto",
+    "skip": "No, gracias. Lo exploraré por mi cuenta",
+    "sidebar_title": "¡Empecemos!\nSácale más partido a Plane.",
+    "back": "Atrás",
+    "next": "Siguiente",
+    "create_first_project": "Crea tu primer proyecto",
+    "steps": {
+      "work-items": {
+        "sidebar": "Elementos de trabajo",
+        "title": "Planifica con elementos de trabajo",
+        "description": "El elemento de trabajo es la unidad básica de Plane. La mayoría de los conceptos de Plane están asociados a los elementos de trabajo y sus propiedades."
+      },
+      "cycles": {
+        "sidebar": "Ciclos",
+        "title": "Avanza con ciclos",
+        "description": "Los ciclos te ayudan a ti y a tu equipo a avanzar más rápido, de forma similar a los sprints del desarrollo ágil."
+      },
+      "modules": {
+        "sidebar": "Módulos",
+        "title": "Divide en módulos",
+        "description": "Los módulos dividen lo grande en proyectos o funcionalidades para que organices mejor el trabajo."
+      },
+      "views": {
+        "sidebar": "Vistas",
+        "title": "Vistas",
+        "description": "Crea filtros personalizados para ver solo los elementos de trabajo que te importan. Guárdalos y compártelos en unos pocos clics."
+      },
+      "pages": {
+        "sidebar": "Páginas",
+        "title": "Documenta con páginas",
+        "description": "Usa Páginas para anotar elementos de trabajo rápidamente en una reunión o al empezar el día."
+      }
+    }
   }
 }

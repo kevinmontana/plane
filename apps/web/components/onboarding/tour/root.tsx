@@ -10,6 +10,7 @@ import { observer } from "mobx-react";
 import { Button } from "@makeplane/propel/components/button";
 import { PlaneLockup } from "@plane/blocks/icons";
 import { CloseOutline } from "@makeplane/propel/icons";
+import { useTranslation } from "@plane/i18n";
 // assets
 import CyclesTour from "@/app/assets/onboarding/cycles.webp?url";
 import IssuesTour from "@/app/assets/onboarding/issues.webp?url";
@@ -29,51 +30,36 @@ export type TOnboardingTourProps = {
 export type TTourSteps = "welcome" | "work-items" | "cycles" | "modules" | "views" | "pages";
 
 const TOUR_STEPS: {
-  key: TTourSteps;
-  title: string;
-  description: string;
+  key: Exclude<TTourSteps, "welcome">;
   image: string;
   prevStep?: TTourSteps;
   nextStep?: TTourSteps;
 }[] = [
   {
     key: "work-items",
-    title: "Plan with work items",
-    description:
-      "The work item is the building block of the Plane. Most concepts in Plane are either associated with work items and their properties.",
     image: IssuesTour,
     nextStep: "cycles",
   },
   {
     key: "cycles",
-    title: "Move with cycles",
-    description:
-      "Cycles help you and your team to progress faster, similar to the sprints commonly used in agile development.",
     image: CyclesTour,
     prevStep: "work-items",
     nextStep: "modules",
   },
   {
     key: "modules",
-    title: "Break into modules",
-    description: "Modules break your big thing into Projects or Features, to help you organize better.",
     image: ModulesTour,
     prevStep: "cycles",
     nextStep: "views",
   },
   {
     key: "views",
-    title: "Views",
-    description:
-      "Create custom filters to display only the work items that matter to you. Save and share your filters in just a few clicks.",
     image: ViewsTour,
     prevStep: "modules",
     nextStep: "pages",
   },
   {
     key: "pages",
-    title: "Document with pages",
-    description: "Use Pages to quickly jot down work items when you're in a meeting or starting a day.",
     image: PagesTour,
     prevStep: "views",
   },
@@ -86,9 +72,11 @@ export const TourRoot = observer(function TourRoot(props: TOnboardingTourProps) 
   // store hooks
   const { toggleCreateProjectModal } = useCommandPalette();
   const { data: currentUser } = useUser();
+  const { t } = useTranslation();
 
   const currentStepIndex = TOUR_STEPS.findIndex((tourStep) => tourStep.key === step);
   const currentStep = TOUR_STEPS[currentStepIndex];
+  const userName = [currentUser?.first_name, currentUser?.last_name].filter(Boolean).join(" ");
 
   return (
     <>
@@ -99,20 +87,15 @@ export const TourRoot = observer(function TourRoot(props: TOnboardingTourProps) 
               <PlaneLockup className="h-10 w-auto text-on-color" />
             </div>
             <div className="flex flex-col overflow-y-auto p-6">
-              <h3 className="font-semibold sm:text-18">
-                Welcome to Plane, {currentUser?.first_name} {currentUser?.last_name}
-              </h3>
-              <p className="mt-3 text-13 text-secondary">
-                We{"'"}re glad that you decided to try out Plane. You can now manage your projects with ease. Get
-                started by creating a project.
-              </p>
+              <h3 className="font-semibold sm:text-18">{t("welcome_modal.title", { name: userName })}</h3>
+              <p className="mt-3 text-13 text-secondary">{t("welcome_modal.description")}</p>
               <div className="flex h-full items-end">
                 <div className="mt-12 flex items-center gap-6">
                   <Button
                     variant="primary"
                     size="sm"
                     stretch="auto"
-                    label="Take a Product Tour"
+                    label={t("welcome_modal.take_tour")}
                     onClick={() => {
                       setStep("work-items");
                     }}
@@ -124,7 +107,7 @@ export const TourRoot = observer(function TourRoot(props: TOnboardingTourProps) 
                       onComplete();
                     }}
                   >
-                    No thanks, I will explore it myself
+                    {t("welcome_modal.skip")}
                   </button>
                 </div>
               </div>
@@ -147,11 +130,15 @@ export const TourRoot = observer(function TourRoot(props: TOnboardingTourProps) 
                 currentStepIndex % 2 === 0 ? "justify-end" : "justify-start"
               }`}
             >
-              <img src={currentStep?.image} className="h-full w-full object-cover" alt={currentStep?.title} />
+              <img
+                src={currentStep?.image}
+                className="h-full w-full object-cover"
+                alt={t(`welcome_modal.steps.${currentStep?.key}.title`)}
+              />
             </div>
             <div className="flex h-1/2 flex-col overflow-y-auto p-4 sm:h-2/5">
-              <h3 className="font-semibold sm:text-18">{currentStep?.title}</h3>
-              <p className="mt-3 text-13 text-secondary">{currentStep?.description}</p>
+              <h3 className="font-semibold sm:text-18">{t(`welcome_modal.steps.${currentStep?.key}.title`)}</h3>
+              <p className="mt-3 text-13 text-secondary">{t(`welcome_modal.steps.${currentStep?.key}.description`)}</p>
               <div className="mt-3 flex h-full items-end justify-between gap-4">
                 <div className="flex items-center gap-4">
                   {currentStep?.prevStep && (
@@ -159,7 +146,7 @@ export const TourRoot = observer(function TourRoot(props: TOnboardingTourProps) 
                       variant="secondary"
                       size="sm"
                       stretch="auto"
-                      label="Back"
+                      label={t("welcome_modal.back")}
                       onClick={() => setStep(currentStep.prevStep ?? "welcome")}
                     />
                   )}
@@ -168,7 +155,7 @@ export const TourRoot = observer(function TourRoot(props: TOnboardingTourProps) 
                       variant="primary"
                       size="sm"
                       stretch="auto"
-                      label="Next"
+                      label={t("welcome_modal.next")}
                       onClick={() => setStep(currentStep.nextStep ?? "work-items")}
                     />
                   )}
@@ -178,7 +165,7 @@ export const TourRoot = observer(function TourRoot(props: TOnboardingTourProps) 
                     variant="primary"
                     size="sm"
                     stretch="auto"
-                    label="Create your first project"
+                    label={t("welcome_modal.create_first_project")}
                     onClick={() => {
                       onComplete();
                       toggleCreateProjectModal(true);
