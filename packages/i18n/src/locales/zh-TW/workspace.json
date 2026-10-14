@@ -148,7 +148,16 @@
     "workitem_resolved_vs_pending": "已解決 vs 待處理的工作項目",
     "projects_by_status": "按狀態分類的專案",
     "active_users": "活躍使用者",
-    "intake_trends": "入學趨勢"
+    "intake_trends": "入學趨勢",
+    "reports": "Reports",
+    "by_state_group": "Work items by state group",
+    "by_assignee": "Work items by assignee",
+    "by_priority": "Work items by priority",
+    "cycle_progress_title": "Cycle progress",
+    "no_active_cycle": "No active cycle",
+    "no_active_cycle_description": "When a cycle is in progress, completed vs total work items appear here.",
+    "completed_of_total": "{completed} of {total} completed",
+    "cancelled_work_items": "Cancelled {entity}"
   },
   "workspace_projects": {
     "label": "{count, plural, one {專案} other {專案}}",

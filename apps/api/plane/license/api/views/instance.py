@@ -165,7 +165,9 @@ class InstanceEndpoint(BaseAPIView):
         serializer = InstanceSerializer(instance, data=request.data, partial=True)
         if serializer.is_valid():
             serializer.save()
-            return Response(serializer.data, status=status.HTTP_200_OK)
+            Instance.objects.filter(pk=instance.pk).update(is_telemetry_enabled=False)
+            instance.refresh_from_db()
+            return Response(InstanceSerializer(instance).data, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 

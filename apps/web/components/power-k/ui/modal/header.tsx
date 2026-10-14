@@ -41,22 +41,30 @@ export function PowerKModalHeader(props: Props) {
       )}
 
       {/* Search Input */}
-      <div className="flex items-center gap-2 px-4 py-3">
-        <SearchOutline className="size-4 shrink-0 text-placeholder" />
-        <Command.Input
-          value={searchTerm}
-          onValueChange={onSearchChange}
-          placeholder={placeholder}
-          className="flex-1 bg-transparent text-13 text-primary placeholder-(--text-color-placeholder) outline-none"
-          autoFocus
-        />
-        {searchTerm && (
-          <button
-            onClick={() => onSearchChange("")}
-            className="flex-shrink-0 rounded-sm p-1 text-placeholder hover:bg-layer-1 hover:text-secondary"
-          >
-            <CloseOutline className="h-3 w-3" />
-          </button>
+      <div className="px-4 py-3">
+        <div className="flex items-center gap-2">
+          <SearchOutline className="size-4 shrink-0 text-placeholder" />
+          <Command.Input
+            value={searchTerm}
+            onValueChange={onSearchChange}
+            placeholder={placeholder}
+            className="flex-1 bg-transparent text-13 text-primary placeholder-(--text-color-placeholder) outline-none"
+            // eslint-disable-next-line jsx-a11y/no-autofocus
+            autoFocus
+          />
+          {searchTerm && (
+            <button
+              onClick={() => onSearchChange("")}
+              className="flex-shrink-0 rounded-sm p-1 text-placeholder hover:bg-layer-1 hover:text-secondary"
+            >
+              <CloseOutline className="h-3 w-3" />
+            </button>
+          )}
+        </div>
+        {!activePage && (
+          <p className="truncate pt-1.5 pl-6 text-11 text-tertiary" title={t("advanced_search.hint")}>
+            {t("advanced_search.hint_short")}
+          </p>
         )}
       </div>
     </div>

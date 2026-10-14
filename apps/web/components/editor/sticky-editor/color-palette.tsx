@@ -6,6 +6,30 @@
 
 import type { TSticky } from "@plane/types";
 
+const STICKY_SURFACE: Record<string, { light: string; dark: string }> = {
+  gray: { light: "#d6d6d8", dark: "#404144" },
+  peach: { light: "#ffd5d7", dark: "#593032" },
+  pink: { light: "#fdd4e3", dark: "#562e3d" },
+  orange: { light: "#ffe3cd", dark: "#583e2a" },
+  green: { light: "#c3f0de", dark: "#1d4a3b" },
+  "light-blue": { light: "#c5eff9", dark: "#1f495c" },
+  "dark-blue": { light: "#c9dafb", dark: "#223558" },
+  purple: { light: "#e3d8fd", dark: "#3d325a" },
+};
+
+const STICKY_INK = {
+  light: "#1c1f26",
+  dark: "#f5f6f8",
+} as const;
+
+export function getStickySurface(colorKey: string | null | undefined, isDark: boolean) {
+  const surface = STICKY_SURFACE[colorKey ?? ""] ?? STICKY_SURFACE.gray;
+  return {
+    backgroundColor: isDark ? surface.dark : surface.light,
+    color: isDark ? STICKY_INK.dark : STICKY_INK.light,
+  };
+}
+
 export const STICKY_COLORS_LIST: {
   key: string;
   label: string;

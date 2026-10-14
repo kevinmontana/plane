@@ -1,0 +1,7 @@
+{
+  "advanced_search": {
+    "placeholder": "Пошук або оператори…",
+    "hint": "Оператори: assignee:me status:started priority:high label:bug project:VTV cycle:Sprint type:issue. Поєднуйте пробілами (AND). Префікс - виключає, наприклад -assignee:me.",
+    "hint_short": "assignee:me status:started priority:high label:name -assignee:me"
+  }
+}

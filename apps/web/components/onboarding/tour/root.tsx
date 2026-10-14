@@ -8,7 +8,7 @@ import { useState } from "react";
 import { observer } from "mobx-react";
 // plane imports
 import { Button } from "@makeplane/propel/components/button";
-import { PlaneLockup } from "@plane/blocks/icons";
+import { VtvLockup } from "@/components/brand/vtv-lockup";
 import { CloseOutline } from "@makeplane/propel/icons";
 import { useTranslation } from "@plane/i18n";
 // assets
@@ -84,7 +84,7 @@ export const TourRoot = observer(function TourRoot(props: TOnboardingTourProps) 
         <div className="w-4/5 overflow-hidden rounded-[10px] bg-surface-1 md:w-1/2 lg:w-2/5">
           <div className="h-full overflow-hidden">
             <div className="grid h-64 place-items-center bg-accent-primary">
-              <PlaneLockup className="h-10 w-auto text-on-color" />
+              <VtvLockup className="h-10" />
             </div>
             <div className="flex flex-col overflow-y-auto p-6">
               <h3 className="font-semibold sm:text-18">{t("welcome_modal.title", { name: userName })}</h3>

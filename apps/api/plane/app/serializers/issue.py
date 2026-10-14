@@ -42,6 +42,7 @@ from plane.db.models import (
     IssueDescriptionVersion,
     ProjectMember,
     EstimatePoint,
+    IssueWorkLog,
 )
 from plane.utils.content_validator import (
     validate_html_content,
@@ -723,6 +724,30 @@ class IssueCommentSerializer(BaseSerializer):
             if sanitized_html is not None:
                 attrs["comment_html"] = sanitized_html
         return attrs
+
+
+class IssueWorkLogSerializer(BaseSerializer):
+    actor_detail = UserLiteSerializer(read_only=True, source="actor")
+
+    class Meta:
+        model = IssueWorkLog
+        fields = "__all__"
+        read_only_fields = [
+            "workspace",
+            "project",
+            "issue",
+            "actor",
+            "created_by",
+            "updated_by",
+            "created_at",
+            "updated_at",
+            "deleted_at",
+        ]
+
+    def validate_duration_minutes(self, value):
+        if value is None or value < 1:
+            raise serializers.ValidationError("Duration must be at least 1 minute.")
+        return value
 
 
 class IssueStateFlatSerializer(BaseSerializer):

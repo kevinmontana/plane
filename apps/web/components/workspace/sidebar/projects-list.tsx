@@ -69,12 +69,13 @@ export const SidebarProjectsList = observer(function SidebarProjectsList() {
     projectPreferences.showLimitedProjects && joinedProjects.length > projectPreferences.limitedProjectsCount;
 
   const handleCopyText = (projectId: string) => {
-    copyUrlToClipboard(`${workspaceSlug}/projects/${projectId}/issues`).then(() => {
+    void copyUrlToClipboard(`${workspaceSlug}/projects/${projectId}/issues`).then(() => {
       setToast({
         type: "success",
         title: t("link_copied"),
         message: t("project_link_copied_to_clipboard"),
       });
+      return undefined;
     });
   };
 
@@ -225,12 +226,12 @@ export const SidebarProjectsList = observer(function SidebarProjectsList() {
                     id="extended-project-sidebar-toggle"
                     aria-label={t(
                       isExtendedProjectSidebarOpened
-                        ? "aria_labels.app_sidebar.close_extended_sidebar"
-                        : "aria_labels.app_sidebar.open_extended_sidebar"
+                        ? "aria_labels.projects_sidebar.close_extended_sidebar"
+                        : "aria_labels.projects_sidebar.open_extended_sidebar"
                     )}
                   >
                     <MoreHorizontalOutline className="size-4 flex-shrink-0" />
-                    <span>{isExtendedProjectSidebarOpened ? "Hide" : "More"}</span>
+                    <span>{isExtendedProjectSidebarOpened ? t("hide") : t("more")}</span>
                   </button>
                 </SidebarNavItem>
               )}

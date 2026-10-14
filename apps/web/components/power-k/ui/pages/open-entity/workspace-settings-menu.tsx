@@ -29,9 +29,11 @@ export const PowerKOpenWorkspaceSettingsMenu = observer(function PowerKOpenWorks
   // derived values
   const settingsList = Object.values(WORKSPACE_SETTINGS).filter(
     (setting) =>
+      setting.key !== "billing-and-plans" &&
       context.params.workspaceSlug &&
       allowPermissions(setting.access, EUserPermissionsLevel.WORKSPACE, context.params.workspaceSlug?.toString())
   );
+  // oxlint-disable-next-line oxc/no-map-spread
   const settingsListWithIcons = settingsList.map((setting) => ({
     ...setting,
     label: t(setting.i18n_label),

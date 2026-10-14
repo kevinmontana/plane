@@ -57,10 +57,10 @@
       "updated_at": "Actualizado el",
       "id": "ID"
     },
-    "label": "Intake",
-    "page_label": "{workspace} - Intake",
+    "label": "Entrada",
+    "page_label": "{workspace} - Entrada",
     "modal": {
-      "title": "Crear elemento de trabajo de intake"
+      "title": "Crear elemento de trabajo de entrada"
     },
     "tabs": {
       "open": "Abiertos",

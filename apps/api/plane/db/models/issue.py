@@ -540,6 +540,32 @@ class IssueComment(ChangeTrackerMixin, ProjectBaseModel):
         return str(self.issue)
 
 
+class IssueWorkLog(ProjectBaseModel):
+    issue = models.ForeignKey(Issue, on_delete=models.CASCADE, related_name="worklogs")
+    actor = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        related_name="issue_worklogs",
+    )
+    duration_minutes = models.PositiveIntegerField(validators=[MinValueValidator(1)])
+    description = models.TextField(blank=True, default="")
+    logged_at = models.DateTimeField(default=timezone.now)
+
+    class Meta:
+        verbose_name = "Issue Work Log"
+        verbose_name_plural = "Issue Work Logs"
+        db_table = "issue_worklogs"
+        ordering = ("-logged_at", "-created_at")
+        indexes = [
+            models.Index(fields=["issue", "-logged_at"], name="issue_workl_issue_i_logged_idx"),
+            models.Index(fields=["project", "-logged_at"], name="issue_workl_project_logged_idx"),
+            models.Index(fields=["workspace", "actor", "-logged_at"], name="issue_workl_workspa_actor_idx"),
+        ]
+
+    def __str__(self):
+        return f"{self.issue_id} {self.duration_minutes}m"
+
+
 class IssueLabel(ProjectBaseModel):
     issue = models.ForeignKey("db.Issue", on_delete=models.CASCADE, related_name="label_issue")
     label = models.ForeignKey("db.Label", on_delete=models.CASCADE, related_name="label_issue")

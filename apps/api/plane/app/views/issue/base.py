@@ -69,6 +69,7 @@ from plane.utils.grouper import (
     issue_queryset_grouper,
 )
 from plane.utils.host import base_host
+from plane.utils.advanced_search import apply_operator_search_from_request
 from plane.utils.issue_filters import issue_filters
 from plane.utils.order_queryset import order_issue_queryset
 from plane.utils.paginator import GroupedOffsetPaginator, SubGroupedOffsetPaginator
@@ -111,6 +112,7 @@ class IssueListEndpoint(BaseAPIView):
         # Apply legacy filters
         filters = issue_filters(request.query_params, "GET")
         issue_queryset = queryset.filter(**filters)
+        issue_queryset = apply_operator_search_from_request(issue_queryset, request)
         issue_queryset = issue_queryset.filter(state__deleted_at__isnull=True)
 
         # Add select_related, prefetch_related if fields or expand is not None
@@ -281,6 +283,7 @@ class IssueViewSet(BaseViewSet):
 
         # Apply legacy filters
         issue_queryset = issue_queryset.filter(**filters, **extra_filters)
+        issue_queryset = apply_operator_search_from_request(issue_queryset, request)
 
         # Keeping a copy of the queryset before applying annotations
         filtered_issue_queryset = copy.deepcopy(issue_queryset)
@@ -924,6 +927,9 @@ class IssuePaginatedViewSet(BaseViewSet):
             base_queryset = base_queryset.filter(updated_at__gt=updated_at)
             queryset = queryset.filter(updated_at__gt=updated_at)
 
+        base_queryset = apply_operator_search_from_request(base_queryset, request)
+        queryset = apply_operator_search_from_request(queryset, request)
+
         queryset = queryset.annotate(
             label_ids=Coalesce(
                 Subquery(
@@ -1081,6 +1087,7 @@ class IssueDetailEndpoint(BaseAPIView):
 
         # Apply legacy filters
         issue = issue.filter(**filters)
+        issue = apply_operator_search_from_request(issue, request)
 
         # Total count queryset
         total_issue_queryset = copy.deepcopy(issue)

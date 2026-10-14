@@ -7,10 +7,10 @@
 /* stickies and editor colors
  * Text colors and the themed light/dark background ramps come from
  * @plane/editor/styles (imported above), which is their single source of truth.
- * Only the un-themed :root fallback below is kept: the editor package declares
- * background colors solely under [data-theme*="light"] / [data-theme*="dark"],
- * so without this they are undefined until a theme lands on the element. */
-:root {
+ * This fallback only applies before a theme attribute exists. A plain :root rule
+ * has the same specificity as [data-theme*="dark"] and, because it comes later,
+ * would keep stickies on the light palette in dark mode. */
+html:not([data-theme]) {
   --editor-colors-gray-background: #d6d6d8;
   --editor-colors-peach-background: #ffd5d7;
   --editor-colors-pink-background: #fdd4e3;
@@ -19,6 +19,24 @@
   --editor-colors-light-blue-background: #c5eff9;
   --editor-colors-dark-blue-background: #c9dafb;
   --editor-colors-purple-background: #e3d8fd;
+}
+
+/* Sticky notes set --sticky-ink to a color that contrasts with the card.
+ * The editor's ProseMirror node inherits the page text color, which disappears
+ * on these backgrounds, and the placeholder color is locked to the theme. */
+.sticky-note .ProseMirror {
+  color: var(--sticky-ink) !important;
+  caret-color: var(--sticky-ink);
+}
+
+.sticky-note .ProseMirror p.is-empty::before,
+.sticky-note .ProseMirror p.is-editor-empty:first-child::before {
+  color: color-mix(in srgb, var(--sticky-ink) 58%, transparent) !important;
+}
+
+.sticky-note button,
+.sticky-note svg {
+  color: color-mix(in srgb, var(--sticky-ink) 78%, transparent);
 }
 
 .shadow-custom {

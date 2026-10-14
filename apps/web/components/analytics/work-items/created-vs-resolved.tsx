@@ -20,7 +20,7 @@ import { useAnalytics } from "@/hooks/store/use-analytics";
 import { AnalyticsService } from "@/services/analytics.service";
 // plane web components
 import AnalyticsSectionWrapper from "../analytics-section-wrapper";
-import { ChartLoader } from "../loaders";
+import { AnalyticsBusyState, ChartLoader } from "../loaders";
 
 const analyticsService = new AnalyticsService();
 const CreatedVsResolved = observer(function CreatedVsResolved() {
@@ -60,12 +60,16 @@ const CreatedVsResolved = observer(function CreatedVsResolved() {
       name: renderFormattedDate(datum.key) ?? datum.key,
     }));
   }, [createdVsResolvedData]);
+  const hasTrendData = useMemo(
+    () => parsedData.some((datum) => Number(datum.created_issues ?? 0) > 0 || Number(datum.completed_issues ?? 0) > 0),
+    [parsedData]
+  );
 
   const areas = useMemo(
     () => [
       {
         key: "completed_issues",
-        label: "Resolved",
+        label: t("common.resolved"),
         fill: "#19803833",
         fillOpacity: 1,
         stackId: "bar-one",
@@ -76,7 +80,7 @@ const CreatedVsResolved = observer(function CreatedVsResolved() {
       },
       {
         key: "created_issues",
-        label: "Created",
+        label: t("created"),
         fill: "#1192E833",
         fillOpacity: 1,
         stackId: "bar-one",
@@ -86,7 +90,7 @@ const CreatedVsResolved = observer(function CreatedVsResolved() {
         strokeOpacity: 1,
       },
     ],
-    []
+    [t]
   );
 
   return (
@@ -96,8 +100,10 @@ const CreatedVsResolved = observer(function CreatedVsResolved() {
       className="col-span-1"
     >
       {isCreatedVsResolvedLoading ? (
-        <ChartLoader />
-      ) : parsedData && parsedData.length > 0 ? (
+        <AnalyticsBusyState label={t("common.loading")}>
+          <ChartLoader />
+        </AnalyticsBusyState>
+      ) : hasTrendData ? (
         <AreaChart
           className="h-[350px] w-full"
           data={parsedData}
@@ -129,7 +135,8 @@ const CreatedVsResolved = observer(function CreatedVsResolved() {
           assetKey="unknown"
           assetClassName="size-20"
           rootClassName="border border-subtle px-5 py-10 md:py-20 md:px-20"
-          title={t("workspace_empty_state.analytics_work_items.title")}
+          title={t("workspace_analytics.empty_state.created_vs_resolved.title")}
+          description={t("workspace_analytics.empty_state.created_vs_resolved.description")}
         />
       )}
     </AnalyticsSectionWrapper>

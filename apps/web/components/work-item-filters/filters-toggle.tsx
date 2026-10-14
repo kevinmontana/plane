@@ -8,6 +8,7 @@ import { observer } from "mobx-react";
 // plane imports
 import type { EIssuesStoreType } from "@plane/types";
 // components
+import { WorkItemOperatorSearch } from "@/components/issues/advanced-search/operator-search";
 import { FiltersToggle } from "@/components/rich-filters/filters-toggle";
 // hooks
 import { useWorkItemFilters } from "@/hooks/store/work-item-filters/use-work-item-filters";
@@ -24,5 +25,10 @@ export const WorkItemFiltersToggle = observer(function WorkItemFiltersToggle(pro
   // derived values
   const filter = getFilter(entityType, entityId);
 
-  return <FiltersToggle filter={filter} />;
+  return (
+    <div className="flex items-center gap-2">
+      <WorkItemOperatorSearch />
+      <FiltersToggle filter={filter} />
+    </div>
+  );
 });

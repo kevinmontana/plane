@@ -1,0 +1,7 @@
+{
+  "advanced_search": {
+    "placeholder": "Pesquise ou use operadores…",
+    "hint": "Operadores: assignee:me status:started priority:high label:bug project:VTV cycle:Sprint type:issue. Combine com espaços (AND). Prefixe com - para excluir, por exemplo -assignee:me.",
+    "hint_short": "assignee:me status:started priority:high label:name -assignee:me"
+  }
+}

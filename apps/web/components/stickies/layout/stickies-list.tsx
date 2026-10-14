@@ -4,12 +4,8 @@
  * See the LICENSE file for details.
  */
 
-import { useEffect, useRef, useState } from "react";
-import type {
-  DropTargetRecord,
-  DragLocationHistory,
-} from "@atlaskit/pragmatic-drag-and-drop/dist/types/internal-types";
-import type { ElementDragPayload } from "@atlaskit/pragmatic-drag-and-drop/element/adapter";
+import { useCallback, useEffect, useRef, useState } from "react";
+import { dropTargetForElements } from "@atlaskit/pragmatic-drag-and-drop/element/adapter";
 import { observer } from "mobx-react";
 import { usePathname } from "next/navigation";
 import { useTheme } from "next-themes";
@@ -36,7 +32,7 @@ import { useSticky } from "@/hooks/use-stickies";
 import { useStickyOperations } from "../sticky/use-operations";
 import { StickiesLoader } from "./stickies-loader";
 import { StickyDNDWrapper } from "./sticky-dnd-wrapper";
-import { getInstructionFromPayload } from "./sticky.helpers";
+import { getStickyDropIndex } from "./sticky.helpers";
 
 type TStickiesLayout = {
   workspaceSlug: string;
@@ -63,7 +59,6 @@ export const StickiesList = observer(function StickiesList(props: TProps) {
   // derived values
   const workspaceStickyIds = getWorkspaceStickyIds(workspaceSlug?.toString());
   const itemWidth = `${100 / columnCount}%`;
-  const totalRows = Math.ceil(workspaceStickyIds.length / columnCount);
   const isStickiesPage = pathname?.includes("stickies");
   const hasGuestLevelPermissions = allowPermissions(
     [EUserWorkspaceRoles.ADMIN, EUserWorkspaceRoles.MEMBER, EUserWorkspaceRoles.GUEST],
@@ -72,6 +67,8 @@ export const StickiesList = observer(function StickiesList(props: TProps) {
   const stickiesResolvedPath = resolvedTheme === "light" ? lightStickiesAsset : darkStickiesAsset;
   const stickiesSearchResolvedPath = resolvedTheme === "light" ? lightStickiesSearchAsset : darkStickiesSearchAsset;
   const masonryRef = useRef<any>(null);
+  const boardRef = useRef<HTMLDivElement>(null);
+  const boardCleanup = useRef<(() => void) | null>(null);
 
   const handleLayout = () => {
     if (masonryRef.current) {
@@ -80,33 +77,37 @@ export const StickiesList = observer(function StickiesList(props: TProps) {
     }
   };
 
-  // Function to determine if an item is in first or last row
-  const getRowPositions = (index: number) => {
-    const currentRow = Math.floor(index / columnCount);
-    return {
-      isInFirstRow: currentRow === 0,
-      isInLastRow: currentRow === totalRows - 1 || index >= workspaceStickyIds.length - columnCount,
-    };
-  };
+  const handleMove = useCallback(
+    (stickyId: string, clientX: number, clientY: number) => {
+      const board = boardRef.current;
+      if (!board) return;
 
-  const handleDrop = (self: DropTargetRecord, source: ElementDragPayload, location: DragLocationHistory) => {
-    const dropTargets = location?.current?.dropTargets ?? [];
-    if (!dropTargets || dropTargets.length <= 0) return;
+      const cards = Array.from(board.querySelectorAll<HTMLElement>("[data-sticky-id]"));
+      const index = getStickyDropIndex(cards, clientX, clientY);
+      void stickyOperations.moveToIndex(workspaceSlug, stickyId, index).finally(() => {
+        requestAnimationFrame(() => {
+          masonryRef.current?.performLayout?.();
+        });
+      });
+    },
+    [stickyOperations, workspaceSlug]
+  );
 
-    const dropTarget = dropTargets[0];
-    if (!dropTarget?.data?.id || !source.data?.id) return;
+  const setBoardNode = useCallback(
+    (node: HTMLDivElement | null) => {
+      boardCleanup.current?.();
+      boardCleanup.current = null;
+      boardRef.current = node;
+      if (!node || !isStickiesPage) return;
 
-    const instruction = getInstructionFromPayload(dropTarget, source, location);
-    const droppedId = dropTarget.data.id;
-    const sourceId = source.data.id;
-
-    try {
-      if (!instruction || !droppedId || !sourceId) return;
-      stickyOperations.updatePosition(workspaceSlug, sourceId as string, droppedId as string, instruction);
-    } catch (error) {
-      console.error("Error reordering sticky:", error);
-    }
-  };
+      boardCleanup.current = dropTargetForElements({
+        element: node,
+        canDrop: ({ source }) => source.data?.type === "sticky",
+        getData: () => ({ type: "sticky-board" }),
+      });
+    },
+    [isStickiesPage]
+  );
 
   if (loader === "init-loader") {
     return <StickiesLoader />;
@@ -148,30 +149,34 @@ export const StickiesList = observer(function StickiesList(props: TProps) {
   }
 
   return (
-    <div className="transition-opacity duration-300 ease-in-out">
+    <div ref={setBoardNode} className="transition-opacity duration-300 ease-in-out">
       {/* @ts-expect-error type mismatch here */}
       <Masonry elementType="div" ref={masonryRef}>
-        {workspaceStickyIds.map((stickyId, index) => {
-          const { isInFirstRow, isInLastRow } = getRowPositions(index);
-          return (
-            <StickyDNDWrapper
-              key={stickyId}
-              stickyId={stickyId}
-              workspaceSlug={workspaceSlug.toString()}
-              itemWidth={itemWidth}
-              handleDrop={handleDrop}
-              isLastChild={index === workspaceStickyIds.length - 1}
-              isInFirstRow={isInFirstRow}
-              isInLastRow={isInLastRow}
-              handleLayout={handleLayout}
-            />
-          );
-        })}
+        {workspaceStickyIds.map((stickyId) => (
+          <StickyDNDWrapper
+            key={stickyId}
+            stickyId={stickyId}
+            workspaceSlug={workspaceSlug.toString()}
+            itemWidth={itemWidth}
+            onMove={handleMove}
+            handleLayout={handleLayout}
+          />
+        ))}
         {intersectionElement && <div style={{ width: itemWidth }}>{intersectionElement}</div>}
       </Masonry>
     </div>
   );
 });
+
+function getColumnCount(width: number | null): number {
+  if (width === null) return 4;
+
+  if (width < 640) return 2; // sm
+  if (width < 850) return 3; // md
+  if (width < 1024) return 4; // lg
+  if (width < 1280) return 5; // xl
+  return 6; // 2xl and above
+}
 
 export function StickiesLayout(props: TStickiesLayout) {
   // states
@@ -194,15 +199,6 @@ export function StickiesLayout(props: TStickiesLayout) {
     return () => resizeObserver.disconnect();
   }, []);
 
-  const getColumnCount = (width: number | null): number => {
-    if (width === null) return 4;
-
-    if (width < 640) return 2; // sm
-    if (width < 850) return 3; // md
-    if (width < 1024) return 4; // lg
-    if (width < 1280) return 5; // xl
-    return 6; // 2xl and above
-  };
   const columnCount = getColumnCount(containerWidth);
 
   return (

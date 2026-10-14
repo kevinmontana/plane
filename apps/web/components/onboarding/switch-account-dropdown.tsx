@@ -9,6 +9,7 @@ import { observer } from "mobx-react";
 // plane imports
 import { Avatar } from "@makeplane/propel/components/avatar";
 import { Menu, MenuContent, MenuItem, MenuTrigger } from "@makeplane/propel/components/menu";
+import { useTranslation } from "@plane/i18n";
 import { getFileURL } from "@plane/utils";
 // hooks
 import { useUser } from "@/hooks/store/user";
@@ -25,6 +26,7 @@ export const SwitchAccountDropdown = observer(function SwitchAccountDropdown(pro
   const [showSwitchAccountModal, setShowSwitchAccountModal] = useState(false);
   // store hooks
   const { data: user } = useUser();
+  const { t } = useTranslation();
 
   const displayName = user?.first_name
     ? `${user?.first_name} ${user?.last_name ?? ""}`
@@ -52,7 +54,11 @@ export const SwitchAccountDropdown = observer(function SwitchAccountDropdown(pro
           <span className="text-13 font-medium text-secondary">{displayName}</span>
         </MenuTrigger>
         <MenuContent side="bottom" align="end">
-          <MenuItem variant="danger" label="Wrong e-mail address?" onClick={() => setShowSwitchAccountModal(true)} />
+          <MenuItem
+            variant="danger"
+            label={t("onboarding_flow.switch_account.wrong_email")}
+            onClick={() => setShowSwitchAccountModal(true)}
+          />
         </MenuContent>
       </Menu>
     </>

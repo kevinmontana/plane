@@ -15,7 +15,7 @@ import { ROLE } from "@plane/constants";
 import { useTranslation } from "@plane/i18n";
 // types
 import { Button } from "@makeplane/propel/components/button";
-import { PlaneLogo } from "@plane/blocks/icons";
+import { VtvLockup } from "@/components/brand/vtv-lockup";
 import { setToast } from "@plane/blocks/toast";
 import type { IWorkspaceMemberInvitation } from "@plane/types";
 import { truncateText } from "@plane/utils";
@@ -64,7 +64,7 @@ function UserInvitationsPage() {
     }
   };
 
-  const submitInvitations = () => {
+  const submitInvitations = async () => {
     if (invitationsRespond.length === 0) {
       setToast({
         type: "error",
@@ -76,36 +76,23 @@ function UserInvitationsPage() {
 
     setIsJoiningWorkspaces(true);
 
-    workspaceService
-      .joinWorkspaces({ invitations: invitationsRespond })
-      .then(() => {
-        mutate(USER_WORKSPACES_LIST);
-        const firstInviteId = invitationsRespond[0];
-        const redirectWorkspace = invitations?.find((i) => i.id === firstInviteId)?.workspace;
-        updateUserProfile({ last_workspace_id: redirectWorkspace?.id })
-          .then(() => {
-            setIsJoiningWorkspaces(false);
-            fetchWorkspaces().then(() => {
-              router.push(`/${redirectWorkspace?.slug}`);
-            });
-          })
-          .catch(() => {
-            setToast({
-              type: "error",
-              title: t("error"),
-              message: t("something_went_wrong_please_try_again"),
-            });
-            setIsJoiningWorkspaces(false);
-          });
-      })
-      .catch((_err) => {
-        setToast({
-          type: "error",
-          title: t("error"),
-          message: t("something_went_wrong_please_try_again"),
-        });
-        setIsJoiningWorkspaces(false);
+    try {
+      await workspaceService.joinWorkspaces({ invitations: invitationsRespond });
+      mutate(USER_WORKSPACES_LIST);
+      const firstInviteId = invitationsRespond[0];
+      const redirectWorkspace = invitations?.find((i) => i.id === firstInviteId)?.workspace;
+      await updateUserProfile({ last_workspace_id: redirectWorkspace?.id });
+      setIsJoiningWorkspaces(false);
+      await fetchWorkspaces();
+      router.push(`/${redirectWorkspace?.slug}`);
+    } catch {
+      setToast({
+        type: "error",
+        title: t("error"),
+        message: t("something_went_wrong_please_try_again"),
       });
+      setIsJoiningWorkspaces(false);
+    }
   };
 
   return (
@@ -117,7 +104,7 @@ function UserInvitationsPage() {
             href="/"
             className="absolute top-1/2 left-5 z-10 grid -translate-y-1/2 place-items-center px-3 sm:top-12 sm:left-1/2 sm:-translate-x-[15px] sm:translate-y-0 sm:px-0 sm:py-5 md:left-1/3"
           >
-            <PlaneLogo className="h-9 w-auto text-primary" />
+            <VtvLockup className="h-9" />
           </Link>
           <div className="absolute top-1/4 right-4 -translate-y-1/2 text-13 text-primary sm:fixed sm:top-12 sm:right-16 sm:translate-y-0 sm:py-5">
             {currentUser?.email}

@@ -148,7 +148,16 @@
     "workitem_resolved_vs_pending": "Work items resolved vs pending",
     "projects_by_status": "Projects by status",
     "active_users": "Active users",
-    "intake_trends": "Intake Trends"
+    "intake_trends": "Intake Trends",
+    "reports": "Reports",
+    "by_state_group": "Work items by state group",
+    "by_assignee": "Work items by assignee",
+    "by_priority": "Work items by priority",
+    "cycle_progress_title": "Cycle progress",
+    "no_active_cycle": "No active cycle",
+    "no_active_cycle_description": "When a cycle is in progress, completed vs total work items appear here.",
+    "completed_of_total": "{completed} of {total} completed",
+    "cancelled_work_items": "Cancelled {entity}"
   },
   "workspace_projects": {
     "label": "{count, plural, one {Project} other {Projects}}",

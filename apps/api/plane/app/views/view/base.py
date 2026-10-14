@@ -40,6 +40,7 @@ from plane.db.models import (
     IssueLabel,
     ModuleIssue,
 )
+from plane.utils.advanced_search import apply_operator_search_from_request
 from plane.utils.issue_filters import issue_filters
 from plane.utils.order_queryset import VIEW_ORDER_BY_ALLOWLIST, order_issue_queryset, sanitize_order_by
 from plane.bgtasks.recent_visited_task import recent_visited_task
@@ -231,6 +232,7 @@ class WorkspaceViewIssuesViewSet(BaseViewSet):
         # Apply legacy filters
         filters = issue_filters(request.query_params, "GET")
         issue_queryset = issue_queryset.filter(**filters)
+        issue_queryset = apply_operator_search_from_request(issue_queryset, request)
 
         # Get common project permission filters
         permission_filters = self._get_project_permission_filters()

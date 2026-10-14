@@ -73,13 +73,21 @@ class ProjectAdvanceAnalyticsEndpoint(ProjectAdvanceAnalyticsBaseView):
         else:
             base_queryset = Issue.issue_objects.filter(**self.filters["base_filters"], project_id=project_id)
 
-        return {
-            "total_work_items": self.get_filtered_counts(base_queryset),
-            "started_work_items": self.get_filtered_counts(base_queryset.filter(state__group="started")),
-            "backlog_work_items": self.get_filtered_counts(base_queryset.filter(state__group="backlog")),
-            "un_started_work_items": self.get_filtered_counts(base_queryset.filter(state__group="unstarted")),
-            "completed_work_items": self.get_filtered_counts(base_queryset.filter(state__group="completed")),
-        }
+        if self.filters["analytics_date_range"]:
+            base_queryset = base_queryset.filter(
+                created_at__gte=self.filters["analytics_date_range"]["current"]["gte"],
+                created_at__lte=self.filters["analytics_date_range"]["current"]["lte"],
+            )
+
+        stats = base_queryset.aggregate(
+            total_work_items=Count("id"),
+            started_work_items=Count("id", filter=Q(state__group="started")),
+            backlog_work_items=Count("id", filter=Q(state__group="backlog")),
+            un_started_work_items=Count("id", filter=Q(state__group="unstarted")),
+            completed_work_items=Count("id", filter=Q(state__group="completed")),
+            cancelled_work_items=Count("id", filter=Q(state__group="cancelled")),
+        )
+        return {key: {"count": value or 0} for key, value in stats.items()}
 
     @allow_permission([ROLE.ADMIN, ROLE.MEMBER])
     def get(self, request: HttpRequest, slug: str, project_id: str) -> Response:

@@ -5,7 +5,8 @@
  */
 
 // plane package imports
-import type { ChartYAxisMetric, IState } from "@plane/types";
+import { STATE_GROUPS } from "@plane/constants";
+import type { ChartYAxisMetric, IState, TStateGroups } from "@plane/types";
 import { ChartXAxisProperty } from "@plane/types";
 
 interface ParamsProps {
@@ -47,6 +48,11 @@ export const generateBarColor = (
         color = baseColors[index];
       }
     }
+  }
+
+  if (params.x_axis === ChartXAxisProperty.STATE_GROUPS) {
+    const group = STATE_GROUPS[value.toLowerCase() as TStateGroups];
+    if (group) color = group.color;
   }
 
   return color;

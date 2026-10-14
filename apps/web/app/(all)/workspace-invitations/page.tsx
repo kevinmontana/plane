@@ -7,14 +7,7 @@
 import { observer } from "mobx-react";
 import { useSearchParams } from "next/navigation";
 import useSWR from "swr";
-import {
-  BoxesOutline,
-  CloseOutline,
-  ShareAltOutline,
-  StarOutline,
-  TickOutline,
-  UserOutline,
-} from "@makeplane/propel/icons";
+import { BoxesOutline, CloseOutline, ShareAltOutline, TickOutline, UserOutline } from "@makeplane/propel/icons";
 // components
 import { LogoSpinner } from "@/components/common/logo-spinner";
 import { EmptySpace, EmptySpaceItem } from "@/components/ui/empty-space";
@@ -51,34 +44,34 @@ function WorkspaceInvitationPage() {
       : null
   );
 
-  const handleAccept = () => {
+  const handleAccept = async () => {
     if (!invitationDetail) return;
-    workspaceService
-      .joinWorkspace(invitationDetail.workspace.slug, invitationDetail.id, {
+    try {
+      await workspaceService.joinWorkspace(invitationDetail.workspace.slug, invitationDetail.id, {
         accepted: true,
         token: token,
-      })
-      .then(() => {
-        if (invitationDetail.email === currentUser?.email) {
-          router.push(`/${invitationDetail.workspace.slug}`);
-        } else {
-          router.push("/");
-        }
-      })
-      .catch((err: unknown) => console.error(err));
+      });
+      if (invitationDetail.email === currentUser?.email) {
+        router.push(`/${invitationDetail.workspace.slug}`);
+      } else {
+        router.push("/");
+      }
+    } catch (err: unknown) {
+      console.error(err);
+    }
   };
 
-  const handleReject = () => {
+  const handleReject = async () => {
     if (!invitationDetail || !token) return;
-    void workspaceService
-      .joinWorkspace(invitationDetail.workspace.slug, invitationDetail.id, {
+    try {
+      await workspaceService.joinWorkspace(invitationDetail.workspace.slug, invitationDetail.id, {
         accepted: false,
         token: token,
-      })
-      .then(() => {
-        router.push("/");
-      })
-      .catch((err: unknown) => console.error(err));
+      });
+      router.push("/");
+    } catch (err: unknown) {
+      console.error(err);
+    }
   };
 
   return (
@@ -117,7 +110,6 @@ function WorkspaceInvitationPage() {
               ) : (
                 <EmptySpaceItem Icon={BoxesOutline} title="Continue to home" href="/" />
               )}
-              <EmptySpaceItem Icon={StarOutline} title="Star us on GitHub" href="https://github.com/makeplane" />
               <EmptySpaceItem
                 Icon={ShareAltOutline}
                 title="Join our community of active creators"

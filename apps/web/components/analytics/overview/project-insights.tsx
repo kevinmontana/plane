@@ -64,7 +64,8 @@ const ProjectInsights = observer(function ProjectInsights() {
           assetKey="unknown"
           assetClassName="size-20"
           rootClassName="border border-subtle px-5 py-10 md:py-20 md:px-20"
-          title={t("workspace_empty_state.analytics_work_items.title")}
+          title={t("workspace_analytics.empty_state.project_insights.title")}
+          description={t("workspace_analytics.empty_state.project_insights.description")}
         />
       ) : (
         <div className="gap-8 lg:flex">

@@ -19,6 +19,10 @@ export const coreRedirectRoutes: RouteConfigEntry[] = [
   // Analytics redirect: /:workspaceSlug/analytics → /:workspaceSlug/analytics/overview
   route(":workspaceSlug/analytics", "routes/redirects/core/analytics.tsx"),
 
+  // Community reports live in Analytics — keep the Pro dashboards URL working.
+  route(":workspaceSlug/dashboards", "routes/redirects/core/dashboards.tsx"),
+  route(":workspaceSlug/dashboards/*", "routes/redirects/core/dashboards.tsx"),
+
   // API tokens redirect: /:workspaceSlug/settings/api-tokens
   // → /settings/profile/api-tokens
   route(":workspaceSlug/settings/api-tokens", "routes/redirects/core/api-tokens.tsx"),

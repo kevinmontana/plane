@@ -193,11 +193,11 @@
     }
   },
   "welcome_modal": {
-    "title": "Bienvenido a Plane, {name}",
-    "description": "Nos alegra que hayas decidido probar Plane. Ahora puedes gestionar tus proyectos con facilidad. Empieza creando un proyecto.",
+    "title": "Bienvenido, {name}",
+    "description": "Ya puedes gestionar los proyectos de VTV desde Gestión de Desarrollo. Empieza creando un proyecto.",
     "take_tour": "Hacer el recorrido del producto",
     "skip": "No, gracias. Lo exploraré por mi cuenta",
-    "sidebar_title": "¡Empecemos!\nSácale más partido a Plane.",
+    "sidebar_title": "¡Empecemos!\nSácale más partido a Gestión de Desarrollo.",
     "back": "Atrás",
     "next": "Siguiente",
     "create_first_project": "Crea tu primer proyecto",

@@ -1,0 +1,7 @@
+{
+  "advanced_search": {
+    "placeholder": "搜索或使用运算符…",
+    "hint": "运算符：assignee:me status:started priority:high label:bug project:VTV cycle:Sprint type:issue。用空格组合（AND）。加 - 表示排除，例如 -assignee:me。",
+    "hint_short": "assignee:me status:started priority:high label:name -assignee:me"
+  }
+}

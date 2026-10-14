@@ -37,6 +37,7 @@ from plane.utils.grouper import (
     issue_on_results,
     issue_queryset_grouper,
 )
+from plane.utils.advanced_search import apply_operator_search_from_request
 from plane.utils.issue_filters import issue_filters
 from plane.utils.order_queryset import order_issue_queryset
 from plane.utils.paginator import GroupedOffsetPaginator, SubGroupedOffsetPaginator
@@ -118,6 +119,7 @@ class IssueArchiveViewSet(BaseViewSet):
 
         # Apply legacy filters
         issue_queryset = issue_queryset.filter(**filters)
+        issue_queryset = apply_operator_search_from_request(issue_queryset, request)
 
         # Total count queryset
         total_issue_queryset = copy.deepcopy(issue_queryset)

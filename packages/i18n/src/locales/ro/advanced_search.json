@@ -1,0 +1,7 @@
+{
+  "advanced_search": {
+    "placeholder": "Caută sau folosește operatori…",
+    "hint": "Operatori: assignee:me status:started priority:high label:bug project:VTV cycle:Sprint type:issue. Combină cu spații (AND). Prefixul - exclude, de exemplu -assignee:me.",
+    "hint_short": "assignee:me status:started priority:high label:name -assignee:me"
+  }
+}

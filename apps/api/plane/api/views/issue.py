@@ -5,7 +5,6 @@
 # Python imports
 import json
 import uuid
-import re
 
 # Django imports
 from django.core.serializers.json import DjangoJSONEncoder
@@ -79,6 +78,7 @@ from plane.db.models import (
     Workspace,
 )
 from plane.settings.storage import S3Storage
+from plane.utils.advanced_search import apply_operator_search, apply_operator_search_from_request
 from plane.utils.path_validator import sanitize_filename
 from plane.utils.order_queryset import (
     ACTIVITY_ORDER_BY_ALLOWLIST,
@@ -383,8 +383,12 @@ class IssueListCreateAPIEndpoint(BaseAPIView):
                 .values("count")
             )
         )
+        issue_queryset = apply_operator_search_from_request(issue_queryset, request)
 
-        total_issue_queryset = Issue.issue_objects.filter(project_id=project_id, workspace__slug=slug)
+        total_issue_queryset = apply_operator_search_from_request(
+            Issue.issue_objects.filter(project_id=project_id, workspace__slug=slug),
+            request,
+        )
 
         # Priority Ordering
         if order_by_param == "priority" or order_by_param == "-priority":
@@ -2274,25 +2278,16 @@ class IssueSearchEndpoint(BaseAPIView):
         if not query:
             return Response({"issues": []}, status=status.HTTP_200_OK)
 
-        # Build search query
-        fields = ["name", "sequence_id", "project__identifier"]
-        q = Q()
-        for field in fields:
-            if field == "sequence_id":
-                # Match whole integers only (exclude decimal numbers)
-                sequences = re.findall(r"\b\d+\b", query)
-                for sequence_id in sequences:
-                    q |= Q(**{"sequence_id": sequence_id})
-            else:
-                q |= Q(**{f"{field}__icontains": query})
-
-        # Filter issues
-        issues = Issue.issue_objects.filter(
-            q,
-            project__project_projectmember__member=self.request.user,
-            project__project_projectmember__is_active=True,
-            project__archived_at__isnull=True,
-            workspace__slug=slug,
+        # Filter issues with operator query (bare words search title/description)
+        issues = apply_operator_search(
+            Issue.issue_objects.filter(
+                project__project_projectmember__member=self.request.user,
+                project__project_projectmember__is_active=True,
+                project__archived_at__isnull=True,
+                workspace__slug=slug,
+            ),
+            query,
+            user=request.user,
         )
 
         # Apply project filter if not searching across workspace

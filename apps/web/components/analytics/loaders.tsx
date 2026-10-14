@@ -4,6 +4,7 @@
  * See the LICENSE file for details.
  */
 
+import type { ReactNode } from "react";
 import { Loader } from "@plane/blocks/skeleton";
 
 export function ProjectInsightsLoader() {
@@ -29,5 +30,14 @@ export function ChartLoader() {
     <Loader className="h-[350px] w-full">
       <Loader.Item height="100%" width="100%" />
     </Loader>
+  );
+}
+
+export function AnalyticsBusyState({ label, children }: { label: string; children: ReactNode }) {
+  return (
+    <div role="status" aria-busy="true" aria-label={label}>
+      <span className="sr-only">{label}</span>
+      {children}
+    </div>
   );
 }

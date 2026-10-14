@@ -39,6 +39,7 @@ export interface IStickyStore {
     destinationId: string,
     edge: InstructionType
   ) => Promise<void>;
+  moveStickyToIndex: (workspaceSlug: string, stickyId: string, index: number) => Promise<void>;
 }
 
 export class StickyStore implements IStickyStore {
@@ -77,6 +78,7 @@ export class StickyStore implements IStickyStore {
       toggleShowNewSticky: action,
       fetchRecentSticky: action,
       updateStickyPosition: action,
+      moveStickyToIndex: action,
     });
     this.stickyService = new StickyService();
   }
@@ -265,6 +267,56 @@ export class StickyStore implements IStickyStore {
 
       await this.stickyService.updateSticky(workspaceSlug, stickyId, {
         sort_order: resultSequence,
+      });
+    } catch (error) {
+      console.error("Failed to move sticky");
+      runInAction(() => {
+        this.stickies[stickyId].sort_order = previousSortOrder;
+      });
+      throw error;
+    }
+  };
+
+  moveStickyToIndex = async (workspaceSlug: string, stickyId: string, index: number) => {
+    const sticky = this.stickies[stickyId];
+    if (!sticky) return;
+
+    const previousSortOrder = sticky.sort_order;
+    const orderedIds = orderBy(
+      (this.workspaceStickies[workspaceSlug] || []).map((id) => this.stickies[id]).filter(Boolean),
+      ["sort_order"],
+      ["desc"]
+    ).map((item) => item.id);
+
+    const currentIndex = orderedIds.indexOf(stickyId);
+    if (currentIndex === index) return;
+
+    const withoutSource = orderedIds.filter((id) => id !== stickyId);
+    const nextIndex = Math.max(0, Math.min(index, withoutSource.length));
+    const previousId = withoutSource[nextIndex - 1];
+    const nextId = withoutSource[nextIndex];
+    const previousOrder = previousId ? this.stickies[previousId]?.sort_order : undefined;
+    const nextOrder = nextId ? this.stickies[nextId]?.sort_order : undefined;
+
+    let sortOrder = 65535;
+    if (previousOrder != null && nextOrder != null) {
+      sortOrder = (previousOrder + nextOrder) / 2;
+    } else if (nextOrder != null) {
+      sortOrder = nextOrder + 10000;
+    } else if (previousOrder != null) {
+      sortOrder = previousOrder - 10000;
+    }
+
+    runInAction(() => {
+      this.stickies[stickyId] = {
+        ...this.stickies[stickyId],
+        sort_order: sortOrder,
+      };
+    });
+
+    try {
+      await this.stickyService.updateSticky(workspaceSlug, stickyId, {
+        sort_order: sortOrder,
       });
     } catch (error) {
       console.error("Failed to move sticky");

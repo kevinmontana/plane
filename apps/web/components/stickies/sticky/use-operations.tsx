@@ -4,7 +4,7 @@
  * See the LICENSE file for details.
  */
 
-import { useMemo } from "react";
+import { useCallback, useMemo } from "react";
 // plane types
 import { useTranslation } from "@plane/i18n";
 import { setToast } from "@plane/blocks/toast";
@@ -26,6 +26,7 @@ export type TOperations = {
     droppedId: string,
     instruction: InstructionType
   ) => Promise<void>;
+  moveToIndex: (workspaceSlug: string, stickyId: string, index: number) => Promise<void>;
 };
 
 type TProps = {
@@ -40,21 +41,31 @@ export const getRandomStickyColor = (): string => {
 export const useStickyOperations = (props: TProps) => {
   const { workspaceSlug } = props;
   // store hooks
-  const { stickies, getWorkspaceStickyIds, createSticky, updateSticky, deleteSticky, updateStickyPosition } =
-    useSticky();
+  const {
+    stickies,
+    getWorkspaceStickyIds,
+    createSticky,
+    updateSticky,
+    deleteSticky,
+    updateStickyPosition,
+    moveStickyToIndex,
+  } = useSticky();
   const { t } = useTranslation();
 
-  const isValid = (data: Partial<TSticky>) => {
-    if (data.name && data.name.length > 100) {
-      setToast({
-        type: "error",
-        title: t("stickies.toasts.not_updated.title"),
-        message: t("stickies.toasts.errors.wrong_name"),
-      });
-      return false;
-    }
-    return true;
-  };
+  const isValid = useCallback(
+    (data: Partial<TSticky>) => {
+      if (data.name && data.name.length > 100) {
+        setToast({
+          type: "error",
+          title: t("stickies.toasts.not_updated.title"),
+          message: t("stickies.toasts.errors.wrong_name"),
+        });
+        return false;
+      }
+      return true;
+    },
+    [t]
+  );
 
   const stickyOperations: TOperations = useMemo(
     () => ({
@@ -126,15 +137,23 @@ export const useStickyOperations = (props: TProps) => {
           });
         }
       },
-      updatePosition: async (
-        workspaceSlug: string,
-        sourceId: string,
-        droppedId: string,
-        instruction: InstructionType
-      ) => {
+      updatePosition: async (slug: string, sourceId: string, droppedId: string, instruction: InstructionType) => {
         try {
-          if (!workspaceSlug) throw new Error("Missing required fields");
-          await updateStickyPosition(workspaceSlug, sourceId, droppedId, instruction);
+          if (!slug) throw new Error("Missing required fields");
+          await updateStickyPosition(slug, sourceId, droppedId, instruction);
+        } catch (error) {
+          console.error("Error in updating sticky position:", error);
+          setToast({
+            type: "error",
+            title: t("stickies.toasts.not_updated.title"),
+            message: t("stickies.toasts.not_updated.message"),
+          });
+        }
+      },
+      moveToIndex: async (slug: string, stickyId: string, index: number) => {
+        try {
+          if (!slug) throw new Error("Missing required fields");
+          await moveStickyToIndex(slug, stickyId, index);
         } catch (error) {
           console.error("Error in updating sticky position:", error);
           setToast({
@@ -145,7 +164,18 @@ export const useStickyOperations = (props: TProps) => {
         }
       },
     }),
-    [createSticky, deleteSticky, getWorkspaceStickyIds, stickies, updateSticky, updateStickyPosition, workspaceSlug]
+    [
+      createSticky,
+      deleteSticky,
+      getWorkspaceStickyIds,
+      moveStickyToIndex,
+      stickies,
+      updateSticky,
+      updateStickyPosition,
+      workspaceSlug,
+      t,
+      isValid,
+    ]
   );
 
   return {

@@ -1,0 +1,7 @@
+{
+  "advanced_search": {
+    "placeholder": "検索または演算子を使用…",
+    "hint": "演算子: assignee:me status:started priority:high label:bug project:VTV cycle:Sprint type:issue。スペースで組み合わせ（AND）。除外するには - を付けます。例: -assignee:me。",
+    "hint_short": "assignee:me status:started priority:high label:name -assignee:me"
+  }
+}

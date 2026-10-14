@@ -9,6 +9,7 @@ import { useState } from "react";
 import { useTheme } from "next-themes";
 // ui
 import { ConfirmDialog } from "@plane/blocks/dialog";
+import { useTranslation } from "@plane/i18n";
 import { setToast } from "@plane/blocks/toast";
 // hooks
 import { useUser } from "@/hooks/store/user";
@@ -27,6 +28,7 @@ export function SwitchAccountModal(props: Props) {
   const router = useAppRouter();
   // store hooks
   const { data: userData, signOut } = useUser();
+  const { t } = useTranslation();
 
   const { setTheme } = useTheme();
 
@@ -46,8 +48,8 @@ export function SwitchAccountModal(props: Props) {
     } catch {
       setToast({
         type: "error",
-        title: "Error!",
-        message: "Failed to sign out. Please try again.",
+        title: t("common.error.label"),
+        message: t("onboarding_flow.switch_account.sign_out_failed"),
       });
     } finally {
       setSwitchingAccount(false);
@@ -61,16 +63,20 @@ export function SwitchAccountModal(props: Props) {
       handleSubmit={handleSwitchAccount}
       isSubmitting={switchingAccount}
       variant="primary"
-      title="Switch account"
+      title={t("onboarding_flow.switch_account.title")}
       content={
         userData?.email ? (
           <>
-            If you have signed up via <span className="text-accent-primary">{userData.email}</span> un-intentionally,
-            you can switch your account to a different one from here.
+            {t("onboarding_flow.switch_account.content_before")}{" "}
+            <span className="text-accent-primary">{userData.email}</span>{" "}
+            {t("onboarding_flow.switch_account.content_after")}
           </>
         ) : null
       }
-      primaryButtonText={{ loading: "Switching...", default: "Switch account" }}
+      primaryButtonText={{
+        loading: t("onboarding_flow.switch_account.switching"),
+        default: t("onboarding_flow.switch_account.title"),
+      }}
     />
   );
 }

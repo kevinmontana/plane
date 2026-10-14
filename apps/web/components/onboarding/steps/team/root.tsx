@@ -20,7 +20,7 @@ import { AddOutline, CloseCircleOutline } from "@makeplane/propel/icons";
 import { Field } from "@makeplane/propel/components/field";
 import { Input, InputGroup } from "@makeplane/propel/components/input";
 import type { EUserPermissions } from "@plane/constants";
-import { ROLE, ROLE_DETAILS } from "@plane/constants";
+import { ROLE_DETAILS } from "@plane/constants";
 import { useTranslation } from "@plane/i18n";
 import { Button } from "@makeplane/propel/components/button";
 import { Button as ButtonElement } from "@makeplane/propel/elements/button";
@@ -141,7 +141,7 @@ const InviteMemberInput = observer(function InviteMemberInput(props: InviteMembe
             rules={{
               pattern: {
                 value: emailRegex,
-                message: "Invalid Email ID",
+                message: t("onboarding_flow.invite.invalid_email"),
               },
             }}
             render={({ field: { value, onChange, ref } }) => (
@@ -193,7 +193,7 @@ const InviteMemberInput = observer(function InviteMemberInput(props: InviteMembe
                         getValues(`emails.${index}.role_active`) ? "text-primary" : "text-placeholder"
                       )}
                     >
-                      {ROLE[value]}
+                      {t(roleOptions.find((role) => role.key === value)?.i18n_title ?? "role_details.member.title")}
                     </span>
                   </Select.Trigger>
                 </Select>
@@ -214,7 +214,7 @@ const InviteMemberInput = observer(function InviteMemberInput(props: InviteMembe
       {email && !emailRegex.test(email) && (
         <div className="mx-8 my-1">
           <span className="text-13">🤥</span>{" "}
-          <span className="mt-1 text-11 text-danger-primary">That doesn{"'"}t look like an email address.</span>
+          <span className="mt-1 text-11 text-danger-primary">{t("onboarding_flow.invite.invalid_looks")}</span>
         </div>
       )}
     </div>
@@ -223,6 +223,7 @@ const InviteMemberInput = observer(function InviteMemberInput(props: InviteMembe
 
 export const InviteTeamStep = observer(function InviteTeamStep(props: Props) {
   const { handleStepChange } = props;
+  const { t } = useTranslation();
 
   const [isInvitationDisabled, setIsInvitationDisabled] = useState(true);
 
@@ -264,10 +265,10 @@ export const InviteTeamStep = observer(function InviteTeamStep(props: Props) {
       .then(async () => {
         setToast({
           type: "success",
-          title: "Success!",
-          message: "Invitations sent successfully.",
+          title: t("common.success"),
+          message: t("onboarding_flow.invite.invitations_sent"),
         });
-        await nextStep();
+        return nextStep();
       })
       .catch((err) => {
         setToast({
@@ -306,13 +307,13 @@ export const InviteTeamStep = observer(function InviteTeamStep(props: Props) {
       }}
     >
       <CommonOnboardingHeader
-        title="Invite your teammates"
-        description="Work in plane happens best with your team. Invite them now to use Plane to its potential."
+        title={t("onboarding_flow.invite.title")}
+        description={t("onboarding_flow.invite.description")}
       />
       <div className="w-full py-4 text-13">
         <div className="group relative mx-8 grid grid-cols-10 gap-4 py-2">
-          <div className="col-span-6 px-1 text-13 font-medium text-secondary">Email</div>
-          <div className="col-span-4 px-1 text-13 font-medium text-secondary">Role</div>
+          <div className="col-span-6 px-1 text-13 font-medium text-secondary">{t("email")}</div>
+          <div className="col-span-4 px-1 text-13 font-medium text-secondary">{t("role")}</div>
         </div>
         <div className="mb-3 space-y-3 sm:space-y-4">
           {fields.map((field, index) => (
@@ -338,7 +339,7 @@ export const InviteTeamStep = observer(function InviteTeamStep(props: Props) {
           onClick={appendField}
         >
           <AddOutline className="h-4 w-4" />
-          Add another
+          {t("onboarding_flow.invite.add_another")}
         </button>
       </div>
       <div className="mx-auto flex w-full flex-col items-center justify-center gap-4 px-8 sm:px-2">
@@ -349,9 +350,15 @@ export const InviteTeamStep = observer(function InviteTeamStep(props: Props) {
           stretch="full"
           disabled={isInvitationDisabled || !isValid || isSubmitting}
         >
-          {isSubmitting ? <Spinner height="20px" width="20px" /> : "Continue"}
+          {isSubmitting ? <Spinner height="20px" width="20px" /> : t("common.continue")}
         </ButtonElement>
-        <Button variant="ghost" size="lg" stretch="full" onClick={nextStep} label="I’ll do it later" />
+        <Button
+          variant="ghost"
+          size="lg"
+          stretch="full"
+          onClick={nextStep}
+          label={t("onboarding_flow.invite.do_it_later")}
+        />
       </div>
     </form>
   );

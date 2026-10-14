@@ -92,14 +92,21 @@ class AdvanceAnalyticsEndpoint(AdvanceAnalyticsBaseView):
 
     def get_work_items_stats(self) -> Dict[str, Dict[str, int]]:
         base_queryset = Issue.issue_objects.filter(**self.filters["base_filters"])
+        if self.filters["analytics_date_range"]:
+            base_queryset = base_queryset.filter(
+                created_at__gte=self.filters["analytics_date_range"]["current"]["gte"],
+                created_at__lte=self.filters["analytics_date_range"]["current"]["lte"],
+            )
 
-        return {
-            "total_work_items": self.get_filtered_counts(base_queryset),
-            "started_work_items": self.get_filtered_counts(base_queryset.filter(state__group="started")),
-            "backlog_work_items": self.get_filtered_counts(base_queryset.filter(state__group="backlog")),
-            "un_started_work_items": self.get_filtered_counts(base_queryset.filter(state__group="unstarted")),
-            "completed_work_items": self.get_filtered_counts(base_queryset.filter(state__group="completed")),
-        }
+        stats = base_queryset.aggregate(
+            total_work_items=Count("id"),
+            started_work_items=Count("id", filter=Q(state__group="started")),
+            backlog_work_items=Count("id", filter=Q(state__group="backlog")),
+            un_started_work_items=Count("id", filter=Q(state__group="unstarted")),
+            completed_work_items=Count("id", filter=Q(state__group="completed")),
+            cancelled_work_items=Count("id", filter=Q(state__group="cancelled")),
+        )
+        return {key: {"count": value or 0} for key, value in stats.items()}
 
     @allow_permission([ROLE.ADMIN, ROLE.MEMBER], level="WORKSPACE")
     def get(self, request: HttpRequest, slug: str) -> Response:

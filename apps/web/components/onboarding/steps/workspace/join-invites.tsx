@@ -6,8 +6,9 @@
 
 import { useState } from "react";
 // plane imports
-import { ROLE } from "@plane/constants";
+import { ROLE_DETAILS } from "@plane/constants";
 import { Button } from "@makeplane/propel/components/button";
+import { useTranslation } from "@plane/i18n";
 import { Button as ButtonElement } from "@makeplane/propel/elements/button";
 import type { IWorkspaceMemberInvitation } from "@plane/types";
 import { Checkbox } from "@makeplane/propel/components/checkbox";
@@ -38,6 +39,7 @@ export function WorkspaceJoinInvitesStep(props: Props) {
   // store hooks
   const { fetchWorkspaces } = useWorkspace();
   const { fetchCurrentUserSettings } = useUserSettings();
+  const { t } = useTranslation();
 
   // handle invitation
   const handleInvitation = (workspace_invitation: IWorkspaceMemberInvitation, action: "accepted" | "withdraw") => {
@@ -50,7 +52,7 @@ export function WorkspaceJoinInvitesStep(props: Props) {
 
   // submit invitations
   const submitInvitations = async () => {
-    const invitation = invitations?.find((invitation) => invitation.id === invitationsRespond[0]);
+    const invitation = invitations?.find((item) => item.id === invitationsRespond[0]);
 
     if (invitationsRespond.length <= 0 && !invitation?.role) return;
 
@@ -69,7 +71,10 @@ export function WorkspaceJoinInvitesStep(props: Props) {
 
   return invitations && invitations.length > 0 ? (
     <div className="flex flex-col gap-10">
-      <CommonOnboardingHeader title="Join invites or create a workspace" description="All your work — unified." />
+      <CommonOnboardingHeader
+        title={t("onboarding_flow.workspace.join_or_create_title")}
+        description={t("onboarding_flow.workspace.unified")}
+      />
       <div className="flex flex-col gap-3">
         {invitations &&
           invitations.length > 0 &&
@@ -77,9 +82,10 @@ export function WorkspaceJoinInvitesStep(props: Props) {
             const isSelected = invitationsRespond.includes(invitation.id);
             const invitedWorkspace = invitation.workspace;
             return (
-              <div
+              <button
+                type="button"
                 key={invitation.id}
-                className={`flex cursor-pointer items-center gap-2 rounded-lg border border-subtle px-3 py-2 hover:bg-surface-2`}
+                className="flex w-full cursor-pointer items-center gap-2 rounded-lg border border-subtle px-3 py-2 text-left hover:bg-surface-2"
                 onClick={() => handleInvitation(invitation, isSelected ? "withdraw" : "accepted")}
               >
                 <div className="flex-shrink-0">
@@ -91,12 +97,17 @@ export function WorkspaceJoinInvitesStep(props: Props) {
                 </div>
                 <div className="min-w-0 flex-1">
                   <div className="text-13 font-medium">{truncateText(invitedWorkspace?.name, 30)}</div>
-                  <p className="text-11 text-secondary">{ROLE[invitation.role]}</p>
+                  <p className="text-11 text-secondary">
+                    {t(ROLE_DETAILS[invitation.role]?.i18n_title ?? "role_details.member.title")}
+                  </p>
                 </div>
                 <span className="pointer-events-none flex-shrink-0">
-                  <Checkbox checked={isSelected} aria-label={invitedWorkspace?.name ?? "Select workspace invitation"} />
+                  <Checkbox
+                    checked={isSelected}
+                    aria-label={invitedWorkspace?.name ?? t("onboarding_flow.workspace.join_or_create_title")}
+                  />
                 </span>
-              </div>
+              </button>
             );
           })}
       </div>
@@ -108,19 +119,19 @@ export function WorkspaceJoinInvitesStep(props: Props) {
           onClick={submitInvitations}
           disabled={isJoiningWorkspaces || !invitationsRespond.length}
         >
-          {isJoiningWorkspaces ? <Spinner height="20px" width="20px" /> : "Continue"}
+          {isJoiningWorkspaces ? <Spinner height="20px" width="20px" /> : t("common.continue")}
         </ButtonElement>
         <Button
           variant="ghost"
           size="lg"
           stretch="full"
-          label="Create new workspace"
+          label={t("onboarding_flow.workspace.create_new")}
           onClick={handleCurrentViewChange}
           disabled={isJoiningWorkspaces}
         />
       </div>
     </div>
   ) : (
-    <div>No Invitations found</div>
+    <div>{t("onboarding_flow.workspace.no_invitations")}</div>
   );
 }

@@ -148,7 +148,16 @@
     "workitem_resolved_vs_pending": "Çözülen vs bekleyen iş öğeleri",
     "projects_by_status": "Durumuna göre projeler",
     "active_users": "Aktif kullanıcılar",
-    "intake_trends": "Alım Eğilimleri"
+    "intake_trends": "Alım Eğilimleri",
+    "reports": "Reports",
+    "by_state_group": "Work items by state group",
+    "by_assignee": "Work items by assignee",
+    "by_priority": "Work items by priority",
+    "cycle_progress_title": "Cycle progress",
+    "no_active_cycle": "No active cycle",
+    "no_active_cycle_description": "When a cycle is in progress, completed vs total work items appear here.",
+    "completed_of_total": "{completed} of {total} completed",
+    "cancelled_work_items": "Cancelled {entity}"
   },
   "workspace_projects": {
     "label": "{count, plural, one {Proje} other {Projeler}}",

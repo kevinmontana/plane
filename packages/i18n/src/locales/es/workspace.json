@@ -54,11 +54,11 @@
     "empty_state": {
       "general": {
         "title": "Resumen de tus proyectos, actividad y métricas",
-        "description": "Bienvenido a Plane, estamos emocionados de tenerte aquí. Crea tu primer proyecto y rastrea tus elementos de trabajo, y esta página se transformará en un espacio que te ayuda a progresar. Los administradores también verán elementos que ayudan a su equipo a progresar.",
+        "description": "Bienvenido a Gestión de Desarrollo. Crea el primer proyecto y rastrea los elementos de trabajo; esta página se convertirá en el espacio de seguimiento del equipo. Los administradores también verán indicadores del avance institucional.",
         "primary_button": {
           "text": "Construye tu primer proyecto",
           "comic": {
-            "title": "Todo comienza con un proyecto en Plane",
+            "title": "Todo comienza con un proyecto",
             "description": "Un proyecto podría ser la hoja de ruta de un producto, una campaña de marketing o el lanzamiento de un nuevo automóvil."
           }
         }
@@ -148,7 +148,16 @@
     "workitem_resolved_vs_pending": "Elementos de trabajo resueltos vs pendientes",
     "projects_by_status": "Proyectos por estado",
     "active_users": "Usuarios activos",
-    "intake_trends": "Tendencias de admisión"
+    "intake_trends": "Tendencias de admisión",
+    "reports": "Reportes",
+    "by_state_group": "Elementos de trabajo por grupo de estado",
+    "by_assignee": "Elementos de trabajo por asignado",
+    "by_priority": "Elementos de trabajo por prioridad",
+    "cycle_progress_title": "Progreso del ciclo",
+    "no_active_cycle": "No hay un ciclo activo",
+    "no_active_cycle_description": "Cuando un ciclo esté en curso, aquí verás los elementos completados frente al total.",
+    "completed_of_total": "{completed} de {total} completados",
+    "cancelled_work_items": "{entity} cancelados"
   },
   "workspace_projects": {
     "label": "{count, plural, one {Proyecto} other {Proyectos}}",
@@ -200,7 +209,7 @@
         "primary_button": {
           "text": "Inicia tu primer proyecto",
           "comic": {
-            "title": "Todo comienza con un proyecto en Plane",
+            "title": "Todo comienza con un proyecto",
             "description": "Un proyecto podría ser la hoja de ruta de un producto, una campaña de marketing o el lanzamiento de un nuevo automóvil."
           }
         }
@@ -211,7 +220,7 @@
         "primary_button": {
           "text": "Inicia tu primer proyecto",
           "comic": {
-            "title": "Todo comienza con un proyecto en Plane",
+            "title": "Todo comienza con un proyecto",
             "description": "Un proyecto podría ser la hoja de ruta de un producto, una campaña de marketing o el lanzamiento de un nuevo automóvil."
           }
         }

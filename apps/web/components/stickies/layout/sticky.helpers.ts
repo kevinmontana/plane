@@ -4,48 +4,27 @@
  * See the LICENSE file for details.
  */
 
-import { extractInstruction } from "@atlaskit/pragmatic-drag-and-drop-hitbox/tree-item";
-import type { InstructionType, IPragmaticPayloadLocation, TDropTarget } from "@plane/types";
-
-export type TargetData = {
-  id: string;
-  parentId: string | null;
-  isGroup: boolean;
-  isChild: boolean;
-};
-
 /**
- * extracts the Payload and translates the instruction for the current dropTarget based on drag and drop payload
- * @param dropTarget dropTarget for which the instruction is required
- * @param source the dragging sticky data that is being dragged on the dropTarget
- * @param location location includes the data of all the dropTargets the source is being dragged on
- * @returns Instruction for dropTarget
+ * Index of the card under the pointer. The dragged sticky is saved into that slot.
  */
-export const getInstructionFromPayload = (
-  dropTarget: TDropTarget,
-  source: TDropTarget,
-  location: IPragmaticPayloadLocation
-): InstructionType | undefined => {
-  const dropTargetData = dropTarget?.data as TargetData;
-  const sourceData = source?.data as TargetData;
-  const allDropTargets = location?.current?.dropTargets;
+export const getStickyDropIndex = (cards: HTMLElement[], clientX: number, clientY: number): number => {
+  const rects = cards.map((card) => card.getBoundingClientRect());
+  if (rects.length === 0) return 0;
 
-  // if all the dropTargets are greater than 1 meaning the source is being dragged on a group and its child at the same time
-  // and also if the dropTarget in question is also a group then, it should be a child of the current Droptarget
-  if (allDropTargets?.length > 1 && dropTargetData?.isGroup) return "make-child";
+  const hit = rects.findIndex(
+    (rect) => clientX >= rect.left && clientX <= rect.right && clientY >= rect.top && clientY <= rect.bottom
+  );
+  if (hit >= 0) return hit;
 
-  if (!dropTargetData || !sourceData) return undefined;
+  let closest = 0;
+  let best = Number.POSITIVE_INFINITY;
+  rects.forEach((rect, index) => {
+    const distance = (clientX - (rect.left + rect.width / 2)) ** 2 + (clientY - (rect.top + rect.height / 2)) ** 2;
+    if (distance < best) {
+      best = distance;
+      closest = index;
+    }
+  });
 
-  let instruction = extractInstruction(dropTargetData)?.type;
-
-  // If the instruction is blocked then set an instruction based on if dropTarget it is a child or not
-  if (instruction === "instruction-blocked") {
-    instruction = dropTargetData.isChild ? "reorder-above" : "make-child";
-  }
-
-  // if source that is being dragged is a group. A group cannon be a child of any other sticky,
-  // hence if current instruction is to be a child of dropTarget then reorder-above instead
-  if (instruction === "make-child" && sourceData.isGroup) instruction = "reorder-above";
-
-  return instruction;
+  return closest;
 };

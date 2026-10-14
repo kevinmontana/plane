@@ -6,7 +6,6 @@
 import json
 import secrets
 import os
-import requests
 
 # Django imports
 from django.core.management.base import BaseCommand, CommandError
@@ -15,7 +14,6 @@ from django.utils import timezone
 
 # Module imports
 from plane.license.models import Instance, InstanceEdition
-from plane.license.bgtasks.telemetry_metrics import push_instance_metrics
 
 
 class Command(BaseCommand):
@@ -37,25 +35,11 @@ class Command(BaseCommand):
             self.stdout.write("Error checking for current version")
             return "v0.1.0"
 
-    def check_for_latest_version(self, fallback_version):
-        try:
-            response = requests.get(
-                "https://api.github.com/repos/makeplane/plane/releases/latest",
-                timeout=10,
-            )
-            response.raise_for_status()
-            data = response.json()
-            return data.get("tag_name", fallback_version)
-        except Exception:
-            self.stdout.write("Error checking for latest version")
-            return fallback_version
-
     def handle(self, *args, **options):
         # Check if the instance is registered
         instance = Instance.objects.first()
 
         current_version = self.check_for_current_version()
-        latest_version = self.check_for_latest_version(current_version)
 
         # If instance is None then register this instance
         if instance is None:
@@ -68,10 +52,11 @@ class Command(BaseCommand):
                 instance_name="Plane Community Edition",
                 instance_id=secrets.token_hex(12),
                 current_version=current_version,
-                latest_version=latest_version,
+                latest_version=current_version,
                 last_checked_at=timezone.now(),
                 is_test=os.environ.get("IS_TEST", "0") == "1",
                 edition=InstanceEdition.PLANE_COMMUNITY.value,
+                is_telemetry_enabled=False,
             )
 
             self.stdout.write(self.style.SUCCESS("Instance registered"))
@@ -81,12 +66,10 @@ class Command(BaseCommand):
             # Update the instance details
             instance.last_checked_at = timezone.now()
             instance.current_version = current_version
-            instance.latest_version = latest_version
+            instance.latest_version = current_version
             instance.is_test = os.environ.get("IS_TEST", "0") == "1"
             instance.edition = InstanceEdition.PLANE_COMMUNITY.value
+            instance.is_telemetry_enabled = False
             instance.save()
-
-        # Push instance metrics on registration
-        push_instance_metrics.delay()
 
         return

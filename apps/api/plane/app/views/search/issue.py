@@ -30,7 +30,7 @@ class IssueSearchEndpoint(BaseAPIView):
         Search issues by query
         """
 
-        issues = search_issues(query, issues)
+        issues = search_issues(query, issues, user=self.request.user)
 
         return issues
 

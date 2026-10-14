@@ -42,12 +42,14 @@ interface ILocalStoreIssueFilters {
 export interface IBaseIssueFilterStore {
   // observables
   filters: Record<string, IIssueFilters>;
+  operatorSearchQuery: string;
   //computed
   appliedFilters: Partial<Record<TIssueParams, string | boolean>> | undefined;
   issueFilters: IIssueFilters | undefined;
 }
 
 export interface IIssueFilterHelperStore {
+  operatorSearchQuery: string;
   computedIssueFilters(filters: IIssueFilters): IIssueFilters;
   computedFilteredParams(
     richFilters: TWorkItemFilterExpression,
@@ -67,6 +69,8 @@ export interface IIssueFilterHelperStore {
 }
 
 export class IssueFilterHelperStore implements IIssueFilterHelperStore {
+  operatorSearchQuery = "";
+
   // oxlint-disable-next-line no-useless-constructor
   constructor() {}
 
@@ -312,6 +316,11 @@ export class IssueFilterHelperStore implements IIssueFilterHelperStore {
       cursor: pageCursor,
       per_page: options.perPageCount.toString(),
     };
+
+    const operatorSearchQuery = this.operatorSearchQuery?.trim();
+    if (operatorSearchQuery) {
+      paginationParams.search_query = operatorSearchQuery;
+    }
 
     // If group by is specifically sent through options, like that for calendar layout, use that to group
     if (options.groupedBy) {

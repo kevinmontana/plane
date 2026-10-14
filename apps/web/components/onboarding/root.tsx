@@ -8,6 +8,7 @@ import { useCallback, useEffect, useState } from "react";
 import { observer } from "mobx-react";
 // plane imports
 import { setToast } from "@plane/blocks/toast";
+import { useTranslation } from "@plane/i18n";
 import type { IWorkspaceMemberInvitation, TOnboardingStep, TOnboardingSteps, TUserProfile } from "@plane/types";
 import { EOnboardingSteps } from "@plane/types";
 // hooks
@@ -29,6 +30,7 @@ export const OnboardingRoot = observer(function OnboardingRoot({ invitations = [
   const { data: userProfile, updateUserProfile, finishUserOnboarding } = useUserProfile();
   const { workspaces } = useWorkspace();
   const { config: instanceConfig } = useInstance();
+  const { t } = useTranslation();
 
   const workspacesList = Object.values(workspaces ?? {});
   const isSelfManaged = instanceConfig?.is_self_managed;
@@ -44,11 +46,11 @@ export const OnboardingRoot = observer(function OnboardingRoot({ invitations = [
     } catch (_error) {
       setToast({
         type: "error",
-        title: "Failed",
-        message: "Failed to finish onboarding, Please try again later.",
+        title: t("common.error.label"),
+        message: t("onboarding_flow.finish_failed"),
       });
     }
-  }, [user, finishUserOnboarding]);
+  }, [user, finishUserOnboarding, t]);
 
   // handle step change
   const stepChange = useCallback(

@@ -464,8 +464,8 @@
       "message": "Ocurrió un error. Por favor, inténtalo de nuevo."
     },
     "group_by": "Agrupar por",
-    "epic": "Epic",
-    "epics": "Epics",
+    "epic": "Épica",
+    "epics": "Épicas",
     "work_item": "Elemento de trabajo",
     "work_items": "Elementos de trabajo",
     "sub_work_item": "Sub-elemento de trabajo",
@@ -490,7 +490,7 @@
     "project_timezone": "Zona horaria del proyecto",
     "created_on": "Creado el",
     "updated_on": "Actualizado el",
-    "completed_on": "Completed on",
+    "completed_on": "Completado el",
     "update_project": "Actualizar proyecto",
     "identifier_already_exists": "El identificador ya existe",
     "add_more": "Agregar más",
@@ -719,11 +719,11 @@
     "details": "Detalles",
     "project_structure": "Estructura del proyecto",
     "custom_properties": "Propiedades personalizadas",
-    "your_profile": "Your profile",
-    "developer": "Developer",
-    "work_structure": "Work structure",
-    "execution": "Execution",
-    "administration": "Administration"
+    "your_profile": "Tu perfil",
+    "developer": "Desarrollador",
+    "work_structure": "Estructura de trabajo",
+    "execution": "Ejecución",
+    "administration": "Administración"
   },
   "chart": {
     "x_axis": "Eje X",
@@ -874,5 +874,90 @@
       "short_description": "Exportar como json"
     }
   },
-  "labels_count": "{count, plural, one {# etiqueta} other {# etiquetas}}"
+  "labels_count": "{count, plural, one {# etiqueta} other {# etiquetas}}",
+  "greeting_morning": "Buenos días",
+  "greeting_afternoon": "Buenas tardes",
+  "greeting_evening": "Buenas noches",
+  "instance_not_ready": {
+    "title": "Gestión de Desarrollo VTV",
+    "description": "Configura la instancia institucional y crea el primer espacio de trabajo para gestionar los proyectos de Venezolana de Televisión.",
+    "get_started": "Comenzar"
+  },
+  "admin_new_user_popup": {
+    "title": "Crear espacio de trabajo",
+    "description": "La instancia está lista. Bienvenido al portal de Gestión de Desarrollo VTV. Empieza creando el primer espacio de trabajo.",
+    "create_workspace": "Crear espacio de trabajo"
+  },
+  "onboarding_flow": {
+    "skip": "Omitir",
+    "consent": "Acepto las comunicaciones institucionales de VTV",
+    "finish_failed": "No se pudo terminar la configuración. Inténtalo más tarde.",
+    "profile": {
+      "title": "Crea tu perfil.",
+      "description": "Así es como aparecerás en Gestión de Desarrollo.",
+      "change_image": "Cambiar imagen",
+      "upload_image": "Subir imagen",
+      "name_placeholder": "Ingresa tu nombre completo",
+      "name_max": "El nombre debe tener como máximo 50 caracteres.",
+      "update_failed": "No se pudieron actualizar los datos del usuario. ¡Inténtalo de nuevo!"
+    },
+    "role": {
+      "title": "¿Cuál es tu rol?",
+      "description": "Configuremos el sistema según cómo trabajas.",
+      "select_one": "Selecciona uno",
+      "product_manager": "Gerente de producto",
+      "engineering_manager": "Gerente de ingeniería",
+      "designer": "Diseñador",
+      "developer": "Desarrollador",
+      "founder_executive": "Fundador/Ejecutivo",
+      "operations_manager": "Gerente de operaciones",
+      "others": "Otros",
+      "completed": "¡Perfil configurado!",
+      "failed": "No se pudo configurar el perfil. ¡Inténtalo de nuevo!"
+    },
+    "use_case": {
+      "title": "¿Qué te trae a Gestión de Desarrollo?",
+      "description": "Cuéntanos tus objetivos y el tamaño de tu equipo.",
+      "select_one_or_more": "Selecciona una o más",
+      "required": "Selecciona al menos una opción",
+      "plan_roadmaps": "Planificar y seguir hojas de ruta de producto",
+      "manage_sprints": "Gestionar sprints de ingeniería",
+      "coordinate_projects": "Coordinar proyectos interfuncionales",
+      "replace_tool": "Reemplazar nuestra herramienta actual",
+      "just_exploring": "Solo estoy explorando"
+    },
+    "workspace": {
+      "unified": "Todo tu trabajo — unificado.",
+      "enter_name": "Ingresa el nombre del espacio de trabajo",
+      "join_existing": "Unirse a un espacio existente",
+      "join_or_create_title": "Únete a invitaciones o crea un espacio de trabajo",
+      "create_new": "Crear nuevo espacio de trabajo",
+      "no_invites": "No parece que tengas invitaciones a un espacio de trabajo y el administrador de tu instancia restringió la creación de espacios nuevos. Pide a un propietario o administrador que te invite primero y vuelve a esta pantalla para unirte.",
+      "just_myself": "Solo yo",
+      "no_invitations": "No se encontraron invitaciones"
+    },
+    "invite": {
+      "title": "Invita a tus compañeros",
+      "description": "El sistema funciona mejor en equipo. Invítalos ahora para aprovecharlo al máximo.",
+      "add_another": "Agregar otro",
+      "do_it_later": "Lo haré más tarde",
+      "invalid_email": "Correo no válido",
+      "invitations_sent": "Invitaciones enviadas correctamente.",
+      "invalid_looks": "Eso no parece una dirección de correo."
+    },
+    "switch_account": {
+      "title": "Cambiar de cuenta",
+      "wrong_email": "¿Correo electrónico incorrecto?",
+      "content_before": "Si te registraste con",
+      "content_after": "por error, puedes cambiar a otra cuenta desde aquí.",
+      "switching": "Cambiando...",
+      "sign_out_failed": "No se pudo cerrar sesión. Inténtalo de nuevo."
+    },
+    "password": {
+      "match": "Las contraseñas coinciden"
+    }
+  },
+  "search_commands": "Buscar comandos...",
+  "more": "Más",
+  "hide": "Ocultar"
 }

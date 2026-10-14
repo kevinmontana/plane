@@ -148,7 +148,16 @@
     "workitem_resolved_vs_pending": "Mục công việc đã giải quyết vs đang chờ",
     "projects_by_status": "Dự án theo trạng thái",
     "active_users": "Người dùng hoạt động",
-    "intake_trends": "Xu hướng tiếp nhận"
+    "intake_trends": "Xu hướng tiếp nhận",
+    "reports": "Reports",
+    "by_state_group": "Work items by state group",
+    "by_assignee": "Work items by assignee",
+    "by_priority": "Work items by priority",
+    "cycle_progress_title": "Cycle progress",
+    "no_active_cycle": "No active cycle",
+    "no_active_cycle_description": "When a cycle is in progress, completed vs total work items appear here.",
+    "completed_of_total": "{completed} of {total} completed",
+    "cancelled_work_items": "Cancelled {entity}"
   },
   "workspace_projects": {
     "label": "{count, plural, one {dự án} other {dự án}}",

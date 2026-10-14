@@ -9,6 +9,7 @@ import { Controller, useForm } from "react-hook-form";
 // plane imports
 import { USE_CASES } from "@plane/constants";
 import { Button } from "@makeplane/propel/components/button";
+import { useTranslation } from "@plane/i18n";
 import { TickOutline } from "@makeplane/propel/icons";
 import { setToast } from "@plane/blocks/toast";
 import type { TUserProfile } from "@plane/types";
@@ -24,6 +25,14 @@ type Props = {
   handleStepChange: (step: EOnboardingSteps, skipInvites?: boolean) => void;
 };
 
+const USE_CASE_LABEL_KEYS: Record<string, string> = {
+  "Plan and track product roadmaps": "onboarding_flow.use_case.plan_roadmaps",
+  "Manage engineering sprints": "onboarding_flow.use_case.manage_sprints",
+  "Coordinate cross-functional projects": "onboarding_flow.use_case.coordinate_projects",
+  "Replace our current tool": "onboarding_flow.use_case.replace_tool",
+  "Just exploring": "onboarding_flow.use_case.just_exploring",
+};
+
 const defaultValues = {
   use_case: [] as string[],
 };
@@ -31,6 +40,7 @@ const defaultValues = {
 export const UseCaseSetupStep = observer(function UseCaseSetupStep({ handleStepChange }: Props) {
   // store hooks
   const { data: profile, updateUserProfile } = useUserProfile();
+  const { t } = useTranslation();
   // form info
   const {
     handleSubmit,
@@ -50,17 +60,17 @@ export const UseCaseSetupStep = observer(function UseCaseSetupStep({ handleStepC
       use_case: formData.use_case && formData.use_case.length > 0 ? formData.use_case.join(". ") : undefined,
     };
     try {
-      [await updateUserProfile(profileUpdatePayload)];
+      await updateUserProfile(profileUpdatePayload);
       setToast({
         type: "success",
-        title: "Success",
-        message: "Profile setup completed!",
+        title: t("common.success"),
+        message: t("onboarding_flow.role.completed"),
       });
     } catch {
       setToast({
         type: "error",
-        title: "Error",
-        message: "Profile setup failed. Please try again!",
+        title: t("common.error.label"),
+        message: t("onboarding_flow.role.failed"),
       });
     }
   };
@@ -78,23 +88,26 @@ export const UseCaseSetupStep = observer(function UseCaseSetupStep({ handleStepC
   };
 
   // derived values
-  const isButtonDisabled = !isSubmitting && isValid ? false : true;
+  const isButtonDisabled = isSubmitting || !isValid;
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-10">
       {/* Header */}
-      <CommonOnboardingHeader title="What brings you to Plane?" description="Tell us your goals and team size." />
+      <CommonOnboardingHeader
+        title={t("onboarding_flow.use_case.title")}
+        description={t("onboarding_flow.use_case.description")}
+      />
 
       {/* Use Case Selection */}
       <div className="flex flex-col gap-3">
-        <p className="text-body-sm-semibold text-placeholder">Select one or more</p>
+        <p className="text-body-sm-semibold text-placeholder">{t("onboarding_flow.use_case.select_one_or_more")}</p>
 
         <Controller
           control={control}
           name="use_case"
           rules={{
-            required: "Please select at least one option",
-            validate: (value) => (value && value.length > 0) || "Please select at least one option",
+            required: t("onboarding_flow.use_case.required"),
+            validate: (value) => (value && value.length > 0) || t("onboarding_flow.use_case.required"),
           }}
           render={({ field: { value, onChange } }) => (
             <div className="flex flex-col gap-3">
@@ -135,7 +148,7 @@ export const UseCaseSetupStep = observer(function UseCaseSetupStep({ handleStepC
                       />
                     </span>
 
-                    <span className="text-body-sm-regular">{useCase}</span>
+                    <span className="text-body-sm-regular">{t(USE_CASE_LABEL_KEYS[useCase] ?? useCase)}</span>
                   </button>
                 );
               })}
@@ -147,8 +160,15 @@ export const UseCaseSetupStep = observer(function UseCaseSetupStep({ handleStepC
 
       {/* Action Buttons */}
       <div className="space-y-3">
-        <Button variant="primary" type="submit" stretch="full" size="lg" disabled={isButtonDisabled} label="Continue" />
-        <Button variant="ghost" onClick={handleSkip} stretch="full" size="lg" label="Skip" />
+        <Button
+          variant="primary"
+          type="submit"
+          stretch="full"
+          size="lg"
+          disabled={isButtonDisabled}
+          label={t("common.continue")}
+        />
+        <Button variant="ghost" onClick={handleSkip} stretch="full" size="lg" label={t("onboarding_flow.skip")} />
       </div>
     </form>
   );

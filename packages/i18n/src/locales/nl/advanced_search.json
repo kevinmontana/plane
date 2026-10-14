@@ -1,0 +1,7 @@
+{
+  "advanced_search": {
+    "placeholder": "Zoeken of operatoren gebruiken…",
+    "hint": "Operatoren: assignee:me status:started priority:high label:bug project:VTV cycle:Sprint type:issue. Combineer met spaties (AND). Prefix met - om uit te sluiten, bijvoorbeeld -assignee:me.",
+    "hint_short": "assignee:me status:started priority:high label:name -assignee:me"
+  }
+}
