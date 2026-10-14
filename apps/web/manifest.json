@@ -4,9 +4,9 @@
   "display": "standalone",
   "scope": "/",
   "start_url": "/",
-  "name": "Plane | Accelerate software development with peace.",
-  "short_name": "Plane",
-  "description": "Plane accelerated the software development by order of magnitude for agencies and product companies.",
+  "name": "Gestión de Desarrollo VTV",
+  "short_name": "VTV",
+  "description": "Sistema institucional de gestión de proyectos y desarrollo de Venezolana de Televisión.",
   "icons": [
     {
       "src": "/icon-192x192.png",

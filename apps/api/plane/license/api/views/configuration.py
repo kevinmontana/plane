@@ -3,6 +3,7 @@
 # See the LICENSE file for details.
 
 # Python imports
+import logging
 from smtplib import (
     SMTPAuthenticationError,
     SMTPConnectError,
@@ -10,6 +11,8 @@ from smtplib import (
     SMTPSenderRefused,
     SMTPServerDisconnected,
 )
+
+logger = logging.getLogger("plane.api")
 
 # Django imports
 from django.core.mail import BadHeaderError, EmailMultiAlternatives, get_connection
@@ -104,6 +107,14 @@ class EmailCredentialCheckEndpoint(BaseAPIView):
             EMAIL_FROM,
         ) = get_email_configuration()
 
+        if not EMAIL_HOST:
+            return Response(
+                {
+                    "error": "SMTP is not saved yet. Click Save changes first, wait for the success toast, then send the test email."
+                },
+                status=status.HTTP_400_BAD_REQUEST,
+            )
+
         # Configure all the connections
         connection = get_connection(
             host=EMAIL_HOST,
@@ -159,13 +170,20 @@ class EmailCredentialCheckEndpoint(BaseAPIView):
                 {"error": "Timeout error while trying to connect to the SMTP server."},
                 status=status.HTTP_400_BAD_REQUEST,
             )
-        except ConnectionError:
+        except ConnectionError as exc:
+            logger.exception("SMTP connection error host=%s port=%s", EMAIL_HOST, EMAIL_PORT)
             return Response(
-                {"error": "Network connection error. Please check your internet connection."},
+                {
+                    "error": (
+                        f"Could not connect to {EMAIL_HOST}:{EMAIL_PORT} ({exc}). "
+                        "Use the mail hostname, not the website."
+                    )
+                },
                 status=status.HTTP_400_BAD_REQUEST,
             )
-        except Exception:
+        except Exception as exc:
+            logger.exception("SMTP send failed host=%s port=%s", EMAIL_HOST, EMAIL_PORT)
             return Response(
-                {"error": "Could not send email. Please check your configuration"},
+                {"error": f"Could not send email: {type(exc).__name__}: {exc}"},
                 status=status.HTTP_400_BAD_REQUEST,
             )

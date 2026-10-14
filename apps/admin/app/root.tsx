@@ -66,6 +66,8 @@ export const meta: Route.MetaFunction = () => [
   { property: "og:title", content: APP_TITLE },
   { property: "og:description", content: APP_DESCRIPTION },
   { property: "og:url", content: "https://gestiondedesarrollo.vtv.com.ve/" },
+  { property: "og:image", content: "https://gestiondedesarrollo.vtv.com.ve/og-image.png" },
+  { property: "og:image:alt", content: "Gestión de Desarrollo VTV" },
   {
     name: "keywords",
     content:

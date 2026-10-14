@@ -7,7 +7,7 @@
 import { cloneDeep, set } from "lodash-es";
 import { action, makeObservable, observable, runInAction } from "mobx";
 // plane imports
-import { setLanguage } from "@plane/i18n";
+import { FALLBACK_LANGUAGE, setLanguage } from "@plane/i18n";
 import type { TLanguage } from "@plane/i18n";
 // types
 import type { IUserTheme, TUserProfile } from "@plane/types";
@@ -112,7 +112,9 @@ export class ProfileStore implements IUserProfileStore {
         this.data = userProfile;
       });
       if (userProfile.language) {
-        void setLanguage(userProfile.language as TLanguage);
+        void setLanguage((userProfile.language || FALLBACK_LANGUAGE) as TLanguage);
+      } else {
+        void setLanguage(FALLBACK_LANGUAGE);
       }
       return userProfile;
     } catch (error) {
