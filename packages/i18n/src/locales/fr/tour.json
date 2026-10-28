@@ -69,7 +69,7 @@
     "page": {
       "step_zero": {
         "title": "Documentez avec des Pages alimentées par l IA",
-        "description": "Les Pages dans Plane vous permettent de capturer, organiser et collaborer sur les informations du projet—sans outils externes."
+        "description": "Les Pages dans Gestión vous permettent de capturer, organiser et collaborer sur les informations du projet—sans outils externes."
       },
       "step_one": {
         "title": "Rendre la page Publique ou Privée",
@@ -95,7 +95,7 @@
     "intake": {
       "step_zero": {
         "title": "Rationalisez les demandes avec la réception",
-        "description": "Une fonctionnalité exclusive de Plane qui permet aux Invités de créer des éléments de travail pour les bugs, demandes ou tickets."
+        "description": "Une fonctionnalité exclusive de Gestión qui permet aux Invités de créer des éléments de travail pour les bugs, demandes ou tickets."
       },
       "step_one": {
         "title": "Demandes de réception ouvertes/fermées",
@@ -113,7 +113,7 @@
     "mcp_connectors": {
       "step_zero": {
         "title": "Arrêtez de changer d’onglet. Connectez votre monde.",
-        "description": "Liez GitHub et Slack pour suivre les PR et résumer les discussions directement dans Plane AI."
+        "description": "Liez GitHub et Slack pour suivre les PR et résumer les discussions directement dans Gestión AI."
       }
     },
     "navigation": {
@@ -154,7 +154,7 @@
   },
   "get_started": {
     "title": "Bonjour {name}, bienvenue à bord!",
-    "description": "Voici tout ce dont vous avez besoin pour lancer votre aventure avec Plane.",
+    "description": "Voici tout ce dont vous avez besoin pour lancer votre aventure avec Gestión.",
     "checklist_section": {
       "title": "Commencer",
       "description": "Commencez votre configuration et voyez vos idées prendre vie plus rapidement.",
@@ -172,7 +172,7 @@
           "title": "Créer une page"
         },
         "item_5": {
-          "title": "Essayer le chat Plane AI"
+          "title": "Essayer le chat Gestión AI"
         },
         "item_6": {
           "title": "Lier les intégrations"
@@ -188,16 +188,16 @@
       "more_integrations": "Parcourir plus d intégrations"
     },
     "switch_to_plane_section": {
-      "title": "Découvrez pourquoi les équipes passent à Plane",
-      "description": "Comparez Plane avec les outils que vous utilisez aujourd hui et voyez la différence."
+      "title": "Découvrez pourquoi les équipes passent à Gestión",
+      "description": "Comparez Gestión avec les outils que vous utilisez aujourd hui et voyez la différence."
     }
   },
   "welcome_modal": {
-    "title": "Welcome to Plane, {name}",
-    "description": "We're glad that you decided to try out Plane. You can now manage your projects with ease. Get started by creating a project.",
+    "title": "Welcome to Gestión, {name}",
+    "description": "We're glad that you decided to try out Gestión. You can now manage your projects with ease. Get started by creating a project.",
     "take_tour": "Take a Product Tour",
     "skip": "No thanks, I will explore it myself",
-    "sidebar_title": "Let's get started!\nGet more out of Plane.",
+    "sidebar_title": "Let's get started!\nGet more out of Gestión.",
     "back": "Back",
     "next": "Next",
     "create_first_project": "Create your first project",
@@ -205,7 +205,7 @@
       "work-items": {
         "sidebar": "Work items",
         "title": "Plan with work items",
-        "description": "The work item is the building block of the Plane. Most concepts in Plane are either associated with work items and their properties."
+        "description": "The work item is the building block of the Gestión. Most concepts in Gestión are either associated with work items and their properties."
       },
       "cycles": {
         "sidebar": "Cycles",

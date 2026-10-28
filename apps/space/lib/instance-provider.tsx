@@ -10,7 +10,6 @@ import { useTheme } from "next-themes";
 import useSWR from "swr";
 // plane imports
 import { SPACE_BASE_PATH } from "@plane/constants";
-import { PlaneLockup } from "@plane/blocks/icons";
 // assets
 import PlaneBackgroundPatternDark from "@/app/assets/auth/background-pattern-dark.svg?url";
 import PlaneBackgroundPattern from "@/app/assets/auth/background-pattern.svg?url";
@@ -20,6 +19,7 @@ import { InstanceFailureView } from "@/components/instance/instance-failure-view
 // hooks
 import { useInstance } from "@/hooks/store/use-instance";
 import { useUser } from "@/hooks/store/use-user";
+import { VtvLockup } from "@/components/brand/vtv-lockup";
 
 export const InstanceProvider = observer(function InstanceProvider({ children }: { children: React.ReactNode }) {
   const { fetchInstanceInfo, instance, error } = useInstance();
@@ -53,12 +53,12 @@ export const InstanceProvider = observer(function InstanceProvider({ children }:
           <div className="z-50 container mx-auto flex h-[110px] flex-shrink-0 items-center justify-between gap-5 px-5 lg:px-0">
             <div className="flex items-center gap-x-2 py-10">
               <Link to={`${SPACE_BASE_PATH}/`}>
-                <PlaneLockup className="h-7 w-auto text-primary" />
+                <VtvLockup className="h-9" />
               </Link>
             </div>
           </div>
           <div className="absolute inset-0 z-0">
-            <img src={patternBackground} className="h-full w-screen object-cover" alt="Plane background pattern" />
+            <img src={patternBackground} className="h-full w-screen object-cover" alt="Patrón de fondo de Gestión" />
           </div>
           <div className="relative z-10 flex-grow">
             <div className="relative mx-auto flex h-full w-full items-center justify-center overflow-y-auto px-6 py-10">

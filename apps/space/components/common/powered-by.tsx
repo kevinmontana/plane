@@ -8,6 +8,8 @@ import { WEBSITE_URL } from "@plane/constants";
 // assets
 import { PlaneLogo } from "@plane/blocks/icons";
 
+const HIDE_POWERED_BY = true;
+
 type TPoweredBy = {
   disabled?: boolean;
 };
@@ -16,7 +18,8 @@ export function PoweredBy(props: TPoweredBy) {
   // props
   const { disabled = false } = props;
 
-  if (disabled || !WEBSITE_URL) return null;
+  // VTV: sin insignia "Desarrollado con" que enlace al sitio de Plane.
+  if (disabled || !WEBSITE_URL || HIDE_POWERED_BY) return null;
 
   return (
     <a
@@ -27,7 +30,7 @@ export function PoweredBy(props: TPoweredBy) {
     >
       <PlaneLogo className="h-3 w-auto text-primary" />
       <div className="text-11">
-        Powered by <span className="font-semibold">Plane Publish</span>
+        Desarrollado con <span className="font-semibold">Gestión Publish</span>
       </div>
     </a>
   );

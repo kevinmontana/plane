@@ -35,17 +35,18 @@ export const getCoreAuthenticationModesMap: (
 }) => ({
   "unique-codes": {
     key: "unique-codes",
-    name: "Unique codes",
+    name: "Códigos únicos",
     description:
-      "Log in or sign up for Plane using codes sent via email. You need to have set up SMTP to use this method.",
+      "Inicia sesión o regístrate en Gestión con códigos enviados por correo. Necesitas tener SMTP configurado para usar este método.",
     icon: <MailOutline className="h-6 w-6 p-0.5 text-tertiary" />,
     config: <EmailCodesConfiguration disabled={disabled} updateConfig={updateConfig} />,
     enabledConfigKey: "ENABLE_MAGIC_LINK_LOGIN",
   },
   "passwords-login": {
     key: "passwords-login",
-    name: "Passwords",
-    description: "Allow members to create accounts with passwords and use it with their email addresses to sign in.",
+    name: "Contraseñas",
+    description:
+      "Permite que los miembros creen cuentas con contraseña y la usen junto con su correo electrónico para iniciar sesión.",
     icon: <KeyOutline className="h-6 w-6 p-0.5 text-tertiary" />,
     config: <PasswordLoginConfiguration disabled={disabled} updateConfig={updateConfig} />,
     enabledConfigKey: "ENABLE_EMAIL_PASSWORD",
@@ -53,7 +54,7 @@ export const getCoreAuthenticationModesMap: (
   google: {
     key: "google",
     name: "Google",
-    description: "Allow members to log in or sign up for Plane with their Google accounts.",
+    description: "Permite que los miembros inicien sesión o se registren en Gestión con sus cuentas de Google.",
     icon: <img src={googleLogo} height={20} width={20} alt="Google Logo" />,
     config: <GoogleConfiguration disabled={disabled} updateConfig={updateConfig} />,
     enabledConfigKey: "IS_GOOGLE_ENABLED",
@@ -61,7 +62,7 @@ export const getCoreAuthenticationModesMap: (
   github: {
     key: "github",
     name: "GitHub",
-    description: "Allow members to log in or sign up for Plane with their GitHub accounts.",
+    description: "Permite que los miembros inicien sesión o se registren en Gestión con sus cuentas de GitHub.",
     icon: (
       <img
         src={resolvedTheme === "dark" ? githubDarkModeImage : githubLightModeImage}
@@ -76,7 +77,7 @@ export const getCoreAuthenticationModesMap: (
   gitlab: {
     key: "gitlab",
     name: "GitLab",
-    description: "Allow members to log in or sign up to plane with their GitLab accounts.",
+    description: "Permite que los miembros inicien sesión o se registren en Gestión con sus cuentas de GitLab.",
     icon: <img src={gitlabLogo} height={20} width={20} alt="GitLab Logo" />,
     config: <GitlabConfiguration disabled={disabled} updateConfig={updateConfig} />,
     enabledConfigKey: "IS_GITLAB_ENABLED",
@@ -84,7 +85,7 @@ export const getCoreAuthenticationModesMap: (
   gitea: {
     key: "gitea",
     name: "Gitea",
-    description: "Allow members to log in or sign up to plane with their Gitea accounts.",
+    description: "Permite que los miembros inicien sesión o se registren en Gestión con sus cuentas de Gitea.",
     icon: <img src={giteaLogo} height={20} width={20} alt="Gitea Logo" />,
     config: <GiteaConfiguration disabled={disabled} updateConfig={updateConfig} />,
     enabledConfigKey: "IS_GITEA_ENABLED",

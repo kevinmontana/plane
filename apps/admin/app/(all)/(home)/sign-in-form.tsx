@@ -114,8 +114,8 @@ export function InstanceSignInForm() {
       <div className="mt-10 flex w-full flex-grow flex-col items-center justify-center py-6">
         <div className="relative flex w-full max-w-[22.5rem] flex-col gap-6">
           <FormHeader
-            heading="Manage your Plane instance"
-            subHeading="Configure instance-wide settings to secure your instance"
+            heading="Administra tu instancia de Gestión"
+            subHeading="Configura los ajustes de toda la instancia para mantenerla segura"
           />
           <form
             className="space-y-4"
@@ -133,7 +133,7 @@ export function InstanceSignInForm() {
 
             <div className="w-full space-y-1">
               <label className="text-13 font-medium text-tertiary" htmlFor="email">
-                Email <span className="text-danger-primary">*</span>
+                Correo electrónico <span className="text-danger-primary">*</span>
               </label>
               <InputGroup size="lg">
                 <Input
@@ -152,7 +152,7 @@ export function InstanceSignInForm() {
 
             <div className="w-full space-y-1">
               <label className="text-13 font-medium text-tertiary" htmlFor="password">
-                Password <span className="text-danger-primary">*</span>
+                Contraseña <span className="text-danger-primary">*</span>
               </label>
               <InputGroup size="lg">
                 <Input
@@ -160,7 +160,7 @@ export function InstanceSignInForm() {
                   id="password"
                   name="password"
                   type={showPassword ? "text" : "password"}
-                  placeholder="Enter your password"
+                  placeholder="Ingresa tu contraseña"
                   value={formData.password}
                   onChange={(e) => handleFormChange("password", e.target.value)}
                   autoComplete="off"
@@ -168,7 +168,7 @@ export function InstanceSignInForm() {
                 {showPassword ? (
                   <button
                     type="button"
-                    aria-label="Hide password"
+                    aria-label="Ocultar contraseña"
                     className="flex items-center justify-center text-placeholder"
                     onClick={() => setShowPassword(false)}
                   >
@@ -177,7 +177,7 @@ export function InstanceSignInForm() {
                 ) : (
                   <button
                     type="button"
-                    aria-label="Show password"
+                    aria-label="Mostrar contraseña"
                     className="flex items-center justify-center text-placeholder"
                     onClick={() => setShowPassword(true)}
                   >
@@ -194,7 +194,7 @@ export function InstanceSignInForm() {
                 stretch="full"
                 disabled={isButtonDisabled}
                 loading={isSubmitting}
-                label="Sign in"
+                label="Iniciar sesión"
               />
             </div>
           </form>

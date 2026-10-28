@@ -69,7 +69,7 @@
     "page": {
       "step_zero": {
         "title": "Документируйте с помощью Страниц на основе ИИ",
-        "description": "Страницы в Plane позволяют вам захватывать, организовывать и сотрудничать над информацией о проекте—без внешних инструментов."
+        "description": "Страницы в Gestión позволяют вам захватывать, организовывать и сотрудничать над информацией о проекте—без внешних инструментов."
       },
       "step_one": {
         "title": "Сделать страницу Общедоступной или Приватной",
@@ -95,7 +95,7 @@
     "intake": {
       "step_zero": {
         "title": "Оптимизируйте запросы с приемом",
-        "description": "Функция только для Plane, которая позволяет Гостям создавать рабочие задачи для ошибок, запросов или тикетов."
+        "description": "Функция только для Gestión, которая позволяет Гостям создавать рабочие задачи для ошибок, запросов или тикетов."
       },
       "step_one": {
         "title": "Открытые/закрытые запросы на прием",
@@ -113,7 +113,7 @@
     "mcp_connectors": {
       "step_zero": {
         "title": "Хватит переключать вкладки. Подключите свой мир.",
-        "description": "Подключите GitHub, Slack для отслеживания PR и получения сводок чатов прямо в Plane AI."
+        "description": "Подключите GitHub, Slack для отслеживания PR и получения сводок чатов прямо в Gestión AI."
       }
     },
     "navigation": {
@@ -154,7 +154,7 @@
   },
   "get_started": {
     "title": "Привет {name}, добро пожаловать на борт!",
-    "description": "Вот все, что вам нужно, чтобы начать свое путешествие с Plane.",
+    "description": "Вот все, что вам нужно, чтобы начать свое путешествие с Gestión.",
     "checklist_section": {
       "title": "Начать",
       "description": "Начните настройку и посмотрите, как ваши идеи воплощаются в жизнь быстрее.",
@@ -172,7 +172,7 @@
           "title": "Создать страницу"
         },
         "item_5": {
-          "title": "Попробовать чат Plane AI"
+          "title": "Попробовать чат Gestión AI"
         },
         "item_6": {
           "title": "Связать интеграции"
@@ -188,16 +188,16 @@
       "more_integrations": "Просмотреть больше интеграций"
     },
     "switch_to_plane_section": {
-      "title": "Узнайте, почему команды переходят на Plane",
-      "description": "Сравните Plane с инструментами, которые вы используете сегодня, и увидьте разницу."
+      "title": "Узнайте, почему команды переходят на Gestión",
+      "description": "Сравните Gestión с инструментами, которые вы используете сегодня, и увидьте разницу."
     }
   },
   "welcome_modal": {
-    "title": "Welcome to Plane, {name}",
-    "description": "We're glad that you decided to try out Plane. You can now manage your projects with ease. Get started by creating a project.",
+    "title": "Welcome to Gestión, {name}",
+    "description": "We're glad that you decided to try out Gestión. You can now manage your projects with ease. Get started by creating a project.",
     "take_tour": "Take a Product Tour",
     "skip": "No thanks, I will explore it myself",
-    "sidebar_title": "Let's get started!\nGet more out of Plane.",
+    "sidebar_title": "Let's get started!\nGet more out of Gestión.",
     "back": "Back",
     "next": "Next",
     "create_first_project": "Create your first project",
@@ -205,7 +205,7 @@
       "work-items": {
         "sidebar": "Work items",
         "title": "Plan with work items",
-        "description": "The work item is the building block of the Plane. Most concepts in Plane are either associated with work items and their properties."
+        "description": "The work item is the building block of the Gestión. Most concepts in Gestión are either associated with work items and their properties."
       },
       "cycles": {
         "sidebar": "Cycles",

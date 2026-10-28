@@ -245,7 +245,7 @@
   "full_changelog": "完全な変更履歴",
   "support": "サポート",
   "forum": "フォーラム",
-  "powered_by_plane_pages": "Planeページを利用",
+  "powered_by_plane_pages": "Gestiónページを利用",
   "please_select_at_least_one_invitation": "少なくとも1つの招待を選択してください。",
   "please_select_at_least_one_invitation_description": "ワークスペースに参加するには少なくとも1つの招待を選択してください。",
   "we_see_that_someone_has_invited_you_to_join_a_workspace": "誰かがあなたをワークスペースに招待しています",
@@ -826,7 +826,7 @@
     "edited_by": "編集者"
   },
   "self_hosted_maintenance_message": {
-    "plane_didnt_start_up_this_could_be_because_one_or_more_plane_services_failed_to_start": "Planeが起動しませんでした。これは1つまたは複数のPlaneサービスの起動に失敗したことが原因である可能性があります。",
+    "plane_didnt_start_up_this_could_be_because_one_or_more_plane_services_failed_to_start": "Gestiónが起動しませんでした。これは1つまたは複数のGestiónサービスの起動に失敗したことが原因である可能性があります。",
     "choose_view_logs_from_setup_sh_and_docker_logs_to_be_sure": "setup.shとDockerのログで「View Logs」を選択し、状況を確認してください。"
   },
   "customize_navigation": "ナビゲーションをカスタマイズ",
@@ -879,22 +879,22 @@
   "greeting_afternoon": "Good afternoon",
   "greeting_evening": "Good evening",
   "instance_not_ready": {
-    "title": "Welcome to Plane",
+    "title": "Welcome to Gestión",
     "description": "Set up your instance and create your first workspace to begin managing projects and work.",
     "get_started": "Get started"
   },
   "admin_new_user_popup": {
     "title": "Create workspace",
-    "description": "Instance setup done! Welcome to Plane instance portal. Start your journey by creating your first workspace.",
+    "description": "Instance setup done! Welcome to Gestión instance portal. Start your journey by creating your first workspace.",
     "create_workspace": "Create workspace"
   },
   "onboarding_flow": {
     "skip": "Skip",
-    "consent": "I agree to Plane marketing communications",
+    "consent": "I agree to Gestión marketing communications",
     "finish_failed": "Failed to finish onboarding. Please try again later.",
     "profile": {
       "title": "Create your profile.",
-      "description": "This is how you will appear in Plane.",
+      "description": "This is how you will appear in Gestión.",
       "change_image": "Change image",
       "upload_image": "Upload image",
       "name_placeholder": "Enter your full name",
@@ -903,7 +903,7 @@
     },
     "role": {
       "title": "What's your role?",
-      "description": "Let's set up Plane for how you work.",
+      "description": "Let's set up Gestión for how you work.",
       "select_one": "Select one",
       "product_manager": "Product Manager",
       "engineering_manager": "Engineering Manager",
@@ -916,7 +916,7 @@
       "failed": "Profile setup failed. Please try again!"
     },
     "use_case": {
-      "title": "What brings you to Plane?",
+      "title": "What brings you to Gestión?",
       "description": "Tell us your goals and team size.",
       "select_one_or_more": "Select one or more",
       "required": "Please select at least one option",
@@ -938,7 +938,7 @@
     },
     "invite": {
       "title": "Invite your teammates",
-      "description": "Work in Plane happens best with your team. Invite them now to use Plane to its potential.",
+      "description": "Work in Gestión happens best with your team. Invite them now to use Gestión to its potential.",
       "add_another": "Add another",
       "do_it_later": "I'll do it later",
       "invalid_email": "Invalid email",

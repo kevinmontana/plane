@@ -1,0 +1,96 @@
+<template>
+  <style>
+    /*
+     * Marca VTV trazada de apps/web/app/assets/brand/vtv-logo.png (coordenadas del PNG de 300 px).
+     * Los colores llegan como variables CSS desde index.html (--ld-ghost, --ld-blue...).
+     */
+    #root {
+      position: absolute;
+      inset: 0;
+    }
+    #ld-svg {
+      position: absolute;
+      inset: 0;
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+    .ld-ghost {
+      fill: var(--ld-ghost, #e3e3e6);
+    }
+  </style>
+  <div id="root" data-composition-id="loader" data-width="720" data-height="480">
+    <svg id="ld-svg" viewBox="9.25 9.15 279 186" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <defs>
+        <linearGradient id="ld-g-yellow" gradientUnits="userSpaceOnUse" x1="14" y1="0" x2="162" y2="0">
+          <stop offset="0" style="stop-color: var(--ld-yellow-a, #f8bb04)" />
+          <stop offset="1" style="stop-color: var(--ld-yellow-b, #f39717)" />
+        </linearGradient>
+        <linearGradient id="ld-g-red" gradientUnits="userSpaceOnUse" x1="235.3" y1="35.4" x2="275" y2="70.6">
+          <stop offset="0" style="stop-color: var(--ld-red-a, #a31915)" />
+          <stop offset="1" style="stop-color: var(--ld-red-b, #d40e13)" />
+        </linearGradient>
+        <!-- Cada pieza se revela con una cápsula que viaja por su eje: la punta dibuja y la cola borra.
+             En x = 0 / y = 0 la cápsula cubre la pieza completa (con 3 unidades de margen). -->
+        <mask id="ld-m-yellow" maskUnits="userSpaceOnUse" x="-400" y="-400" width="1200" height="1000">
+          <rect id="ld-cap-yellow" x="11" y="24.5" width="170.7" height="80" rx="40" fill="#fff" />
+        </mask>
+        <mask id="ld-m-blue" maskUnits="userSpaceOnUse" x="-400" y="-400" width="1200" height="1000">
+          <g transform="translate(127 110) rotate(50.5)">
+            <rect id="ld-cap-blue" x="-55.6" y="-48" width="88.3" height="92" fill="#fff" />
+          </g>
+        </mask>
+        <mask id="ld-m-red" maskUnits="userSpaceOnUse" x="-400" y="-400" width="1200" height="1000">
+          <g transform="translate(250.3 48.7) rotate(-48.5)">
+            <rect id="ld-cap-red" x="-185.8" y="-45" width="222" height="90" rx="45" fill="#fff" />
+          </g>
+        </mask>
+      </defs>
+
+      <!-- Silueta neutra fija -->
+      <g id="ld-ghost">
+        <path class="ld-ghost" d="M64.9,93 L159,93 L162,97 L169.9,97 L114,152.6 Z" />
+        <path class="ld-ghost" d="M46.5,32 L112.5,32 L162,97 L46.5,97 A32.5 32.5 0 0 1 46.5,32 Z" />
+        <path
+          class="ld-ghost"
+          d="M225.4,26.7 A33.2 33.2 0 1 1 275.2,70.7 L179.3,179 A29 29 0 0 1 135.2,178.2 L114,152.6 Z"
+        />
+      </g>
+
+      <!-- Marca a color: azul debajo, amarillo encima, rojo arriba de todo -->
+      <path
+        id="ld-blue"
+        d="M64.9,93 L159,93 L162,97 L169.9,97 L114,152.6 Z"
+        style="fill: var(--ld-blue, #262f66)"
+        mask="url(#ld-m-blue)"
+      />
+      <path
+        id="ld-yellow"
+        d="M46.5,32 L112.5,32 L162,97 L46.5,97 A32.5 32.5 0 0 1 46.5,32 Z"
+        fill="url(#ld-g-yellow)"
+        mask="url(#ld-m-yellow)"
+      />
+      <path
+        id="ld-red"
+        d="M225.4,26.7 A33.2 33.2 0 1 1 275.2,70.7 L179.3,179 A29 29 0 0 1 135.2,178.2 L114,152.6 Z"
+        fill="url(#ld-g-red)"
+        mask="url(#ld-m-red)"
+      />
+    </svg>
+  </div>
+  <script>
+    // Recorridos en unidades del viewBox. 0 = pieza completa; la entrada parte de valores negativos
+    // y la salida sigue en el mismo sentido hasta que la cola deja la pieza.
+    const tl = gsap.timeline({ paused: true });
+    // Entrada (0 a 1.10 s): el amarillo avanza a la derecha, el azul baja por el brazo izquierdo detrás de él y el rojo sube hasta la punta.
+    tl.fromTo("#ld-cap-yellow", { x: -170.7 }, { x: 0, duration: 0.38, ease: "power1.in" }, 0);
+    tl.fromTo("#ld-cap-blue", { x: -88.3 }, { x: 0, duration: 0.2, ease: "none" }, 0.26);
+    tl.fromTo("#ld-cap-red", { x: -212.7 }, { x: 0, duration: 0.68, ease: "power2.out" }, 0.42);
+    // Marca completa hasta 1.48 s. Salida (1.48 a 2.04 s) en el mismo sentido del trazo.
+    tl.fromTo("#ld-cap-yellow", { x: 0 }, { x: 139.5, duration: 0.24, ease: "power1.in", immediateRender: false }, 1.48);
+    tl.fromTo("#ld-cap-blue", { x: 0 }, { x: 88.3, duration: 0.18, ease: "none", immediateRender: false }, 1.6);
+    tl.fromTo("#ld-cap-red", { x: 0 }, { x: 222, duration: 0.3, ease: "power1.out", immediateRender: false }, 1.74);
+    // Silueta sola de 2.04 a 2.30 s; el ciclo vuelve a empezar sin salto.
+    window.__timelines["loader"] = tl;
+  </script>
+</template>

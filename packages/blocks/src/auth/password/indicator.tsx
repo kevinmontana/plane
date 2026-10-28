@@ -6,9 +6,25 @@
 
 import React from "react";
 import { E_PASSWORD_STRENGTH } from "@plane/constants";
+import { useTranslation } from "@plane/i18n";
 import { cn, getPasswordStrength, getPasswordCriteria } from "@plane/utils";
 import { getStrengthInfo, getFragmentColor } from "./helper";
 import { TickCircleOutline } from "@makeplane/propel/icons";
+
+const STRENGTH_MESSAGE_KEYS: Record<E_PASSWORD_STRENGTH, string> = {
+  [E_PASSWORD_STRENGTH.EMPTY]: "auth.common.password.errors.empty",
+  [E_PASSWORD_STRENGTH.LENGTH_NOT_VALID]: "auth.common.password.errors.too_short",
+  [E_PASSWORD_STRENGTH.STRENGTH_NOT_VALID]: "auth.common.password.errors.strength.weak",
+  [E_PASSWORD_STRENGTH.STRENGTH_VALID]: "auth.common.password.errors.strength.strong",
+};
+
+const CRITERIA_LABEL_KEYS: Record<string, string> = {
+  length: "auth.common.password.criteria.length",
+  uppercase: "auth.common.password.criteria.uppercase",
+  lowercase: "auth.common.password.criteria.lowercase",
+  number: "auth.common.password.criteria.number",
+  special: "auth.common.password.criteria.special",
+};
 
 export interface PasswordStrengthIndicatorProps {
   password: string;
@@ -21,6 +37,7 @@ export function PasswordStrengthIndicator({
   showCriteria = true,
   isFocused = false,
 }: PasswordStrengthIndicatorProps) {
+  const { t } = useTranslation();
   const strength = getPasswordStrength(password);
   const criteria = getPasswordCriteria(password);
   const strengthInfo = getStrengthInfo(strength);
@@ -49,7 +66,9 @@ export function PasswordStrengthIndicator({
 
         {/* Strength Message */}
         {password && (
-          <p className={cn("!text-body-xs-medium font-medium", strengthInfo.textColor)}>{strengthInfo.message}</p>
+          <p className={cn("!text-body-xs-medium font-medium", strengthInfo.textColor)}>
+            {t(STRENGTH_MESSAGE_KEYS[strength] ?? strengthInfo.message)}
+          </p>
         )}
       </div>
 
@@ -72,7 +91,7 @@ export function PasswordStrengthIndicator({
                   "text-primary": !criterion.isValid,
                 })}
               >
-                {criterion.label}
+                {CRITERIA_LABEL_KEYS[criterion.key] ? t(CRITERIA_LABEL_KEYS[criterion.key]) : criterion.label}
               </span>
             </div>
           ))}

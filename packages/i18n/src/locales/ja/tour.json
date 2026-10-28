@@ -69,7 +69,7 @@
     "page": {
       "step_zero": {
         "title": "AI搭載ページでドキュメント化",
-        "description": "Planeのページでは、プロジェクトの情報を記録・整理し、共同編集できます。外部ツールは必要ありません。"
+        "description": "Gestiónのページでは、プロジェクトの情報を記録・整理し、共同編集できます。外部ツールは必要ありません。"
       },
       "step_one": {
         "title": "ページを公開または非公開にする",
@@ -95,7 +95,7 @@
     "intake": {
       "step_zero": {
         "title": "インテークでリクエストを効率化",
-        "description": "ゲストがバグ、リクエスト、またはチケットの作業項目を作成できるPlane専用の機能です。"
+        "description": "ゲストがバグ、リクエスト、またはチケットの作業項目を作成できるGestión専用の機能です。"
       },
       "step_one": {
         "title": "Intakeリクエストのオープン／クローズ",
@@ -113,7 +113,7 @@
     "mcp_connectors": {
       "step_zero": {
         "title": "タブ切り替えをやめて、あなたの世界をつなげましょう。",
-        "description": "GitHubやSlackをリンクして、Plane AIで直接PRを追跡したりチャットを要約したりできます。"
+        "description": "GitHubやSlackをリンクして、Gestión AIで直接PRを追跡したりチャットを要約したりできます。"
       }
     },
     "navigation": {
@@ -154,7 +154,7 @@
   },
   "get_started": {
     "title": "こんにちは{name}さん、ようこそ！",
-    "description": "Planeでの旅を始めるために必要なすべてがここにあります。",
+    "description": "Gestiónでの旅を始めるために必要なすべてがここにあります。",
     "checklist_section": {
       "title": "始める",
       "description": "セットアップを進めて、アイデアをすばやく形にしましょう。",
@@ -172,7 +172,7 @@
           "title": "ページを作成"
         },
         "item_5": {
-          "title": "Plane AIチャットを試す"
+          "title": "Gestión AIチャットを試す"
         },
         "item_6": {
           "title": "統合をリンク"
@@ -188,16 +188,16 @@
       "more_integrations": "その他の統合を参照"
     },
     "switch_to_plane_section": {
-      "title": "チームがPlaneに切り替える理由を発見",
-      "description": "今日使用しているツールとPlaneを比較して、違いを確認してください。"
+      "title": "チームがGestiónに切り替える理由を発見",
+      "description": "今日使用しているツールとGestiónを比較して、違いを確認してください。"
     }
   },
   "welcome_modal": {
-    "title": "Welcome to Plane, {name}",
-    "description": "We're glad that you decided to try out Plane. You can now manage your projects with ease. Get started by creating a project.",
+    "title": "Welcome to Gestión, {name}",
+    "description": "We're glad that you decided to try out Gestión. You can now manage your projects with ease. Get started by creating a project.",
     "take_tour": "Take a Product Tour",
     "skip": "No thanks, I will explore it myself",
-    "sidebar_title": "Let's get started!\nGet more out of Plane.",
+    "sidebar_title": "Let's get started!\nGet more out of Gestión.",
     "back": "Back",
     "next": "Next",
     "create_first_project": "Create your first project",
@@ -205,7 +205,7 @@
       "work-items": {
         "sidebar": "Work items",
         "title": "Plan with work items",
-        "description": "The work item is the building block of the Plane. Most concepts in Plane are either associated with work items and their properties."
+        "description": "The work item is the building block of the Gestión. Most concepts in Gestión are either associated with work items and their properties."
       },
       "cycles": {
         "sidebar": "Cycles",

@@ -11,6 +11,7 @@ import { useSearchParams } from "next/navigation";
 import { SitesAuthService } from "@plane/services";
 import type { IEmailCheckData } from "@plane/types";
 import { OAuthOptions } from "@plane/blocks/auth";
+import { useTranslation } from "@plane/i18n";
 // helpers
 import type { TAuthErrorInfo } from "@/helpers/authentication.helper";
 import { EErrorAlertType, authErrorHandler, EAuthenticationErrorCodes } from "@/helpers/authentication.helper";
@@ -20,7 +21,6 @@ import { useInstance } from "@/hooks/store/use-instance";
 // types
 import { EAuthModes, EAuthSteps } from "@/types/auth";
 // local imports
-import { TermsAndConditions } from "../terms-and-conditions";
 import { AuthBanner } from "./auth-banner";
 import { AuthHeader } from "./auth-header";
 import { AuthEmailForm } from "./email";
@@ -43,6 +43,7 @@ export const AuthRoot = observer(function AuthRoot() {
   const [isPasswordAutoset, setIsPasswordAutoset] = useState(true);
   // hooks
   const { config } = useInstance();
+  const { t } = useTranslation();
 
   useEffect(() => {
     if (error_code) {
@@ -84,7 +85,8 @@ export const AuthRoot = observer(function AuthRoot() {
   const isSMTPConfigured = config?.is_smtp_configured || false;
   const isMagicLoginEnabled = config?.is_magic_login_enabled || false;
   const isEmailPasswordEnabled = config?.is_email_password_enabled || false;
-  const oAuthActionText = authMode === EAuthModes.SIGN_UP ? "Sign up" : "Sign in";
+  const oAuthActionText =
+    authMode === EAuthModes.SIGN_UP ? t("auth.sign_up.header.step.email.header") : t("auth.common.login");
   const { isOAuthEnabled, oAuthOptions } = useOAuthConfig(oAuthActionText);
 
   // submit handler- email verification
@@ -185,7 +187,6 @@ export const AuthRoot = observer(function AuthRoot() {
             }}
           />
         )}
-        <TermsAndConditions isSignUp={authMode === EAuthModes.SIGN_UP ? true : false} />
       </div>
     </div>
   );

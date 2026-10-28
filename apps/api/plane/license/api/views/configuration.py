@@ -125,8 +125,8 @@ class EmailCredentialCheckEndpoint(BaseAPIView):
             use_ssl=EMAIL_USE_SSL == "1",
         )
         # Prepare email details
-        subject = "Email Notification from Plane"
-        message = "This is a sample email notification sent from Plane application."
+        subject = "Correo de prueba de Gestión"
+        message = "Este es un correo de prueba enviado desde Gestión. Si lo recibiste, la configuración SMTP funciona."
         # Send the email
         try:
             msg = EmailMultiAlternatives(

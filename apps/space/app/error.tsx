@@ -16,22 +16,22 @@ function ErrorPage() {
     <div className="grid h-screen place-items-center bg-surface-1 p-4">
       <div className="space-y-8 text-center">
         <div className="space-y-2">
-          <h3 className="text-16 font-semibold">Yikes! That doesn{"'"}t look good.</h3>
+          <h3 className="text-16 font-semibold">¡Ups! Algo salió mal.</h3>
           <p className="mx-auto text-13 text-secondary md:w-1/2">
-            That crashed Plane, pun intended. No worries, though. Our engineers have been notified. If you have more
-            details, please write to{" "}
+            Gestión tuvo un fallo inesperado. No te preocupes, el equipo técnico ya fue notificado. Si tienes más
+            detalles, escribe a{" "}
             <a href="mailto:support@plane.so" className="text-accent-primary">
               support@plane.so
             </a>{" "}
-            or on our{" "}
+            o en nuestro{" "}
             <a href="https://forum.plane.so" target="_blank" className="text-accent-primary" rel="noopener noreferrer">
-              Forum
+              Foro
             </a>
             .
           </p>
         </div>
         <div className="flex items-center justify-center gap-2">
-          <Button variant="primary" size="md" stretch="auto" label="Refresh" onClick={handleRetry} />
+          <Button variant="primary" size="md" stretch="auto" label="Recargar" onClick={handleRetry} />
           {/* <Button variant="secondary" size="lg" onClick={() => {}}>
             Sign out
           </Button> */}

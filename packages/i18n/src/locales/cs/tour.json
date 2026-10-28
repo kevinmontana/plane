@@ -69,7 +69,7 @@
     "page": {
       "step_zero": {
         "title": "Dokumentujte s AI stránkami",
-        "description": "Stránky v Plane vám umožňují zachytit, organizovat a spolupracovat na projektových informacích—bez externích nástrojů."
+        "description": "Stránky v Gestión vám umožňují zachytit, organizovat a spolupracovat na projektových informacích—bez externích nástrojů."
       },
       "step_one": {
         "title": "Nastavte stránku jako Veřejnou nebo Soukromou",
@@ -95,7 +95,7 @@
     "intake": {
       "step_zero": {
         "title": "Zefektivněte požadavky s příjmem",
-        "description": "Funkce pouze v Plane, která umožňuje hostům vytvářet pracovní položky pro chyby, požadavky nebo tikety."
+        "description": "Funkce pouze v Gestión, která umožňuje hostům vytvářet pracovní položky pro chyby, požadavky nebo tikety."
       },
       "step_one": {
         "title": "Otevřené/uzavřené požadavky příjmu",
@@ -113,7 +113,7 @@
     "mcp_connectors": {
       "step_zero": {
         "title": "Přestaňte přepínat záložky. Propojte svůj svět.",
-        "description": "Propojte GitHub, Slack pro sledování PR a shrnutí chatů přímo v Plane AI."
+        "description": "Propojte GitHub, Slack pro sledování PR a shrnutí chatů přímo v Gestión AI."
       }
     },
     "navigation": {
@@ -154,7 +154,7 @@
   },
   "get_started": {
     "title": "Ahoj {name}, vítej na palubě!",
-    "description": "Zde je vše, co potřebujete k nastartování vaší cesty s Plane.",
+    "description": "Zde je vše, co potřebujete k nastartování vaší cesty s Gestión.",
     "checklist_section": {
       "title": "Začít",
       "description": "Začněte s nastavením a uvidíte své nápady ožít rychleji.",
@@ -172,7 +172,7 @@
           "title": "Vytvořit stránku"
         },
         "item_5": {
-          "title": "Vyzkoušet Plane AI chat"
+          "title": "Vyzkoušet Gestión AI chat"
         },
         "item_6": {
           "title": "Propojit integrace"
@@ -188,16 +188,16 @@
       "more_integrations": "Procházet další integrace"
     },
     "switch_to_plane_section": {
-      "title": "Objevte, proč týmy přecházejí na Plane",
-      "description": "Porovnejte Plane s nástroji, které dnes používáte, a uvidíte rozdíl."
+      "title": "Objevte, proč týmy přecházejí na Gestión",
+      "description": "Porovnejte Gestión s nástroji, které dnes používáte, a uvidíte rozdíl."
     }
   },
   "welcome_modal": {
-    "title": "Welcome to Plane, {name}",
-    "description": "We're glad that you decided to try out Plane. You can now manage your projects with ease. Get started by creating a project.",
+    "title": "Welcome to Gestión, {name}",
+    "description": "We're glad that you decided to try out Gestión. You can now manage your projects with ease. Get started by creating a project.",
     "take_tour": "Take a Product Tour",
     "skip": "No thanks, I will explore it myself",
-    "sidebar_title": "Let's get started!\nGet more out of Plane.",
+    "sidebar_title": "Let's get started!\nGet more out of Gestión.",
     "back": "Back",
     "next": "Next",
     "create_first_project": "Create your first project",
@@ -205,7 +205,7 @@
       "work-items": {
         "sidebar": "Work items",
         "title": "Plan with work items",
-        "description": "The work item is the building block of the Plane. Most concepts in Plane are either associated with work items and their properties."
+        "description": "The work item is the building block of the Gestión. Most concepts in Gestión are either associated with work items and their properties."
       },
       "cycles": {
         "sidebar": "Cycles",

@@ -36,13 +36,15 @@ type Props = {
 const integrationDetails: { [key: string]: any } = {
   github: {
     logo: GithubLogo,
-    installed: "Activate GitHub on individual projects to sync with specific repositories.",
-    notInstalled: "Connect with GitHub with your Plane workspace to sync project work items.",
+    installed: "Activa GitHub en proyectos individuales para sincronizarlos con repositorios específicos.",
+    notInstalled:
+      "Conecta GitHub con tu espacio de trabajo de Gestión para sincronizar los elementos de trabajo de los proyectos.",
   },
   slack: {
     logo: SlackLogo,
-    installed: "Activate Slack on individual projects to sync with specific channels.",
-    notInstalled: "Connect with Slack with your Plane workspace to sync project work items.",
+    installed: "Activa Slack en proyectos individuales para sincronizarlos con canales específicos.",
+    notInstalled:
+      "Conecta Slack con tu espacio de trabajo de Gestión para sincronizar los elementos de trabajo de los proyectos.",
   },
 };
 

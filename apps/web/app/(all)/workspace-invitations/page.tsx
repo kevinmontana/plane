@@ -80,39 +80,39 @@ function WorkspaceInvitationPage() {
         {invitationDetail && !invitationDetail.responded_at ? (
           error ? (
             <div className="shadow-2xl flex w-full flex-col space-y-4 rounded-sm border border-subtle bg-surface-1 px-4 py-8 text-center md:w-1/3">
-              <h2 className="text-18 uppercase">INVITATION NOT FOUND</h2>
+              <h2 className="text-18 uppercase">INVITACIÓN NO ENCONTRADA</h2>
             </div>
           ) : (
             <EmptySpace
-              title={`You have been invited to ${invitationDetail.workspace.name}`}
-              description="Your workspace is where you'll create projects, collaborate on your work items, and organize different streams of work in your Plane account."
+              title={`Has sido invitado a ${invitationDetail.workspace.name}`}
+              description="Tu espacio de trabajo es donde crearás proyectos, colaborarás en tus elementos de trabajo y organizarás las distintas líneas de trabajo de tu cuenta de Gestión."
             >
-              <EmptySpaceItem Icon={TickOutline} title="Accept" action={handleAccept} />
-              <EmptySpaceItem Icon={CloseOutline} title="Ignore" action={handleReject} />
+              <EmptySpaceItem Icon={TickOutline} title="Aceptar" action={handleAccept} />
+              <EmptySpaceItem Icon={CloseOutline} title="Ignorar" action={handleReject} />
             </EmptySpace>
           )
         ) : error || invitationDetail?.responded_at ? (
           invitationDetail?.accepted ? (
             <EmptySpace
-              title={`You are already a member of ${invitationDetail.workspace.name}`}
-              description="Your workspace is where you'll create projects, collaborate on your work items, and organize different streams of work in your Plane account."
+              title={`Ya eres miembro de ${invitationDetail.workspace.name}`}
+              description="Tu espacio de trabajo es donde crearás proyectos, colaborarás en tus elementos de trabajo y organizarás las distintas líneas de trabajo de tu cuenta de Gestión."
             >
-              <EmptySpaceItem Icon={BoxesOutline} title="Continue to home" href="/" />
+              <EmptySpaceItem Icon={BoxesOutline} title="Ir al inicio" href="/" />
             </EmptySpace>
           ) : (
             <EmptySpace
-              title="This invitation link is not active anymore."
-              description="Your workspace is where you'll create projects, collaborate on your work items, and organize different streams of work in your Plane account."
-              link={{ text: "Or start from an empty project", href: "/" }}
+              title="Este enlace de invitación ya no está activo."
+              description="Tu espacio de trabajo es donde crearás proyectos, colaborarás en tus elementos de trabajo y organizarás las distintas líneas de trabajo de tu cuenta de Gestión."
+              link={{ text: "O empieza con un proyecto vacío", href: "/" }}
             >
               {!currentUser ? (
-                <EmptySpaceItem Icon={UserOutline} title="Sign in to continue" href="/" />
+                <EmptySpaceItem Icon={UserOutline} title="Inicia sesión para continuar" href="/" />
               ) : (
-                <EmptySpaceItem Icon={BoxesOutline} title="Continue to home" href="/" />
+                <EmptySpaceItem Icon={BoxesOutline} title="Ir al inicio" href="/" />
               )}
               <EmptySpaceItem
                 Icon={ShareAltOutline}
-                title="Join our community of active creators"
+                title="Únete a nuestra comunidad de creadores activos"
                 href="https://forum.plane.so"
               />
             </EmptySpace>

@@ -15,15 +15,15 @@ import { useInstance } from "@/hooks/store/use-instance";
 
 const authContentMap = {
   [EAuthModes.SIGN_IN]: {
-    pageTitle: "Sign up",
+    pageTitle: "auth.common.login",
     text: "auth.common.new_to_plane",
-    linkText: "Sign up",
+    linkText: "auth.sign_up.header.step.email.header",
     linkHref: "/sign-up",
   },
   [EAuthModes.SIGN_UP]: {
-    pageTitle: "Sign in",
+    pageTitle: "auth.sign_up.page_title",
     text: "auth.common.already_have_an_account",
-    linkText: "Sign in",
+    linkText: "auth.common.login",
     linkHref: "/sign-in",
   },
 };
@@ -68,7 +68,7 @@ export function AuthHeaderBase(props: TAuthHeaderBase) {
   const { pageTitle, additionalAction } = props;
   return (
     <>
-      <PageHead title={pageTitle + " - VTV"} />
+      <PageHead title={pageTitle + " - Gestión"} />
       <div className="sticky top-0 flex w-full flex-shrink-0 items-center justify-between gap-6">
         <Link href="/">
           <VtvLockup className="h-10" />

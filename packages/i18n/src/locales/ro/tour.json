@@ -69,7 +69,7 @@
     "page": {
       "step_zero": {
         "title": "Documentează cu Pagini alimentate de AI",
-        "description": "Paginile în Plane îți permit să capturezi, să organizezi și să colaborezi la informații despre proiect—fără instrumente externe."
+        "description": "Paginile în Gestión îți permit să capturezi, să organizezi și să colaborezi la informații despre proiect—fără instrumente externe."
       },
       "step_one": {
         "title": "Fă pagina Publică sau Privată",
@@ -95,7 +95,7 @@
     "intake": {
       "step_zero": {
         "title": "Simplifică cererile cu admitere",
-        "description": "O funcție exclusivă Plane care permite Oaspeților să creeze elemente de lucru pentru erori, cereri sau tichete."
+        "description": "O funcție exclusivă Gestión care permite Oaspeților să creeze elemente de lucru pentru erori, cereri sau tichete."
       },
       "step_one": {
         "title": "Cereri de admitere deschise/închise",
@@ -113,7 +113,7 @@
     "mcp_connectors": {
       "step_zero": {
         "title": "Oprește schimbarea filelor. Conectează-ți lumea.",
-        "description": "Conectează GitHub, Slack pentru a urmări PR-urile și a rezuma conversațiile direct în Plane AI."
+        "description": "Conectează GitHub, Slack pentru a urmări PR-urile și a rezuma conversațiile direct în Gestión AI."
       }
     },
     "navigation": {
@@ -154,7 +154,7 @@
   },
   "get_started": {
     "title": "Salut {name}, bun venit la bord!",
-    "description": "Iată tot ce ai nevoie pentru a-ți începe călătoria cu Plane.",
+    "description": "Iată tot ce ai nevoie pentru a-ți începe călătoria cu Gestión.",
     "checklist_section": {
       "title": "Începe",
       "description": "Începe configurarea și vezi-ți ideile prind viață mai repede.",
@@ -172,7 +172,7 @@
           "title": "Creează o pagină"
         },
         "item_5": {
-          "title": "Încearcă chatul Plane AI"
+          "title": "Încearcă chatul Gestión AI"
         },
         "item_6": {
           "title": "Conectează integrări"
@@ -188,16 +188,16 @@
       "more_integrations": "Explorează mai multe integrări"
     },
     "switch_to_plane_section": {
-      "title": "Descoperă de ce echipele trec la Plane",
-      "description": "Compară Plane cu instrumentele pe care le folosești astăzi și vezi diferența."
+      "title": "Descoperă de ce echipele trec la Gestión",
+      "description": "Compară Gestión cu instrumentele pe care le folosești astăzi și vezi diferența."
     }
   },
   "welcome_modal": {
-    "title": "Welcome to Plane, {name}",
-    "description": "We're glad that you decided to try out Plane. You can now manage your projects with ease. Get started by creating a project.",
+    "title": "Welcome to Gestión, {name}",
+    "description": "We're glad that you decided to try out Gestión. You can now manage your projects with ease. Get started by creating a project.",
     "take_tour": "Take a Product Tour",
     "skip": "No thanks, I will explore it myself",
-    "sidebar_title": "Let's get started!\nGet more out of Plane.",
+    "sidebar_title": "Let's get started!\nGet more out of Gestión.",
     "back": "Back",
     "next": "Next",
     "create_first_project": "Create your first project",
@@ -205,7 +205,7 @@
       "work-items": {
         "sidebar": "Work items",
         "title": "Plan with work items",
-        "description": "The work item is the building block of the Plane. Most concepts in Plane are either associated with work items and their properties."
+        "description": "The work item is the building block of the Gestión. Most concepts in Gestión are either associated with work items and their properties."
       },
       "cycles": {
         "sidebar": "Cycles",

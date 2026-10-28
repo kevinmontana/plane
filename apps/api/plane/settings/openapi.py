@@ -12,9 +12,9 @@ SPECTACULAR_SETTINGS = {
     # ========================================================================
     # Basic API Information
     # ========================================================================
-    "TITLE": "The Plane REST API",
+    "TITLE": "API REST de Gestión",
     "DESCRIPTION": (
-        "The Plane REST API\n\n"
+        "API REST de Gestión\n\n"
         "Visit our quick start guide and full API documentation at "
         "[developers.plane.so](https://developers.plane.so/api-reference/introduction)."
     ),

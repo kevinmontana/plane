@@ -245,7 +245,7 @@
   "full_changelog": "Nhật ký thay đổi đầy đủ",
   "support": "Hỗ trợ",
   "forum": "Forum",
-  "powered_by_plane_pages": "Được hỗ trợ bởi Plane Pages",
+  "powered_by_plane_pages": "Được hỗ trợ bởi Gestión Pages",
   "please_select_at_least_one_invitation": "Vui lòng chọn ít nhất một lời mời.",
   "please_select_at_least_one_invitation_description": "Vui lòng chọn ít nhất một lời mời để tham gia không gian làm việc.",
   "we_see_that_someone_has_invited_you_to_join_a_workspace": "Chúng tôi thấy có người đã mời bạn tham gia không gian làm việc",
@@ -826,7 +826,7 @@
     "edited_by": "Được chỉnh sửa bởi"
   },
   "self_hosted_maintenance_message": {
-    "plane_didnt_start_up_this_could_be_because_one_or_more_plane_services_failed_to_start": "Plane không khởi động được. Điều này có thể do một hoặc nhiều dịch vụ Plane không khởi động được.",
+    "plane_didnt_start_up_this_could_be_because_one_or_more_plane_services_failed_to_start": "Gestión không khởi động được. Điều này có thể do một hoặc nhiều dịch vụ Gestión không khởi động được.",
     "choose_view_logs_from_setup_sh_and_docker_logs_to_be_sure": "Chọn View Logs từ setup.sh và log Docker để chắc chắn."
   },
   "customize_navigation": "Tùy chỉnh điều hướng",
@@ -838,7 +838,7 @@
   "pin": "Ghim",
   "unpin": "Bỏ ghim",
   "workspace_dashboards": "Bảng điều khiển",
-  "pi_chat": "Plane AI",
+  "pi_chat": "Gestión AI",
   "in_app": "Trong ứng dụng",
   "forms": "Biểu mẫu",
   "milestones": "Cột mốc",
@@ -879,22 +879,22 @@
   "greeting_afternoon": "Good afternoon",
   "greeting_evening": "Good evening",
   "instance_not_ready": {
-    "title": "Welcome to Plane",
+    "title": "Welcome to Gestión",
     "description": "Set up your instance and create your first workspace to begin managing projects and work.",
     "get_started": "Get started"
   },
   "admin_new_user_popup": {
     "title": "Create workspace",
-    "description": "Instance setup done! Welcome to Plane instance portal. Start your journey by creating your first workspace.",
+    "description": "Instance setup done! Welcome to Gestión instance portal. Start your journey by creating your first workspace.",
     "create_workspace": "Create workspace"
   },
   "onboarding_flow": {
     "skip": "Skip",
-    "consent": "I agree to Plane marketing communications",
+    "consent": "I agree to Gestión marketing communications",
     "finish_failed": "Failed to finish onboarding. Please try again later.",
     "profile": {
       "title": "Create your profile.",
-      "description": "This is how you will appear in Plane.",
+      "description": "This is how you will appear in Gestión.",
       "change_image": "Change image",
       "upload_image": "Upload image",
       "name_placeholder": "Enter your full name",
@@ -903,7 +903,7 @@
     },
     "role": {
       "title": "What's your role?",
-      "description": "Let's set up Plane for how you work.",
+      "description": "Let's set up Gestión for how you work.",
       "select_one": "Select one",
       "product_manager": "Product Manager",
       "engineering_manager": "Engineering Manager",
@@ -916,7 +916,7 @@
       "failed": "Profile setup failed. Please try again!"
     },
     "use_case": {
-      "title": "What brings you to Plane?",
+      "title": "What brings you to Gestión?",
       "description": "Tell us your goals and team size.",
       "select_one_or_more": "Select one or more",
       "required": "Please select at least one option",
@@ -938,7 +938,7 @@
     },
     "invite": {
       "title": "Invite your teammates",
-      "description": "Work in Plane happens best with your team. Invite them now to use Plane to its potential.",
+      "description": "Work in Gestión happens best with your team. Invite them now to use Gestión to its potential.",
       "add_another": "Add another",
       "do_it_later": "I'll do it later",
       "invalid_email": "Invalid email",
