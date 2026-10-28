@@ -13,5 +13,6 @@ docker compose up -d --no-deps api worker beat-worker migrator live web space ad
   referencia (`docker-compose.server.yml`, `Caddyfile`). El Caddyfile está montado en `plane-proxy-1`:
   editarlo **en el mismo inodo** (`cat nuevo > Caddyfile`) y luego `docker exec plane-proxy-1 caddy reload --config /etc/caddy/Caddyfile`.
 - Rangos de Cloudflare en el Caddyfile: revisar https://www.cloudflare.com/ips/ cada 6 meses.
-- Los `Dockerfile.*.legacy` existen porque el daemon del servidor (storage `vfs`, dentro de LXD) no puede usar BuildKit.
+- Docker en el servidor usa storage `fuse-overlayfs` (el rootfs LXD es `idmapped` y el kernel 5.15 no permite `overlay2`).
+  BuildKit funciona desde que el contenedor tiene `security.nesting=true` (2026-10-28); los builds usan los Dockerfiles oficiales.
 - Registro público cerrado (`ENABLE_SIGNUP=0` en God Mode → Authentication).
