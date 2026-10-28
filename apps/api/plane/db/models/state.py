@@ -20,46 +20,67 @@ class StateGroup(models.TextChoices):
     TRIAGE = "triage", "Triage"
 
 
-# Default states
+# Default states for every new project (VTV delivery workflow).
 DEFAULT_STATES = [
     {
-        "name": "Backlog",
-        "color": "#60646C",
-        "sequence": 15000,
-        "group": StateGroup.BACKLOG.value,
+        "name": "New",
+        "color": "#6B7280",
+        "sequence": 10000,
+        "group": StateGroup.UNSTARTED.value,
         "default": True,
     },
     {
-        "name": "Todo",
+        "name": "Backlog",
         "color": "#60646C",
-        "sequence": 25000,
+        "sequence": 20000,
+        "group": StateGroup.BACKLOG.value,
+    },
+    {
+        "name": "Plan",
+        "color": "#3B82F6",
+        "sequence": 30000,
         "group": StateGroup.UNSTARTED.value,
     },
     {
-        "name": "In Progress",
+        "name": "Build",
         "color": "#F59E0B",
-        "sequence": 35000,
+        "sequence": 40000,
+        "group": StateGroup.STARTED.value,
+    },
+    {
+        "name": "Test",
+        "color": "#8B5CF6",
+        "sequence": 50000,
+        "group": StateGroup.STARTED.value,
+    },
+    {
+        "name": "Verify",
+        "color": "#0EA5E9",
+        "sequence": 60000,
         "group": StateGroup.STARTED.value,
     },
     {
         "name": "Done",
         "color": "#46A758",
-        "sequence": 45000,
+        "sequence": 70000,
         "group": StateGroup.COMPLETED.value,
     },
     {
         "name": "Cancelled",
         "color": "#9AA4BC",
-        "sequence": 55000,
+        "sequence": 80000,
         "group": StateGroup.CANCELLED.value,
     },
     {
         "name": "Triage",
         "color": "#4E5355",
-        "sequence": 65000,
+        "sequence": 90000,
         "group": StateGroup.TRIAGE.value,
+        "is_triage": True,
     },
 ]
+
+DEFAULT_VISIBLE_STATE_NAMES = [state["name"] for state in DEFAULT_STATES if state["group"] != StateGroup.TRIAGE.value]
 
 
 class StateManager(SoftDeletionManager):

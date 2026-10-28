@@ -138,6 +138,11 @@ MIDDLEWARE = [
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": ("rest_framework.authentication.SessionAuthentication",),
     "DEFAULT_THROTTLE_CLASSES": ("rest_framework.throttling.AnonRateThrottle",),
+    # El proxy (Caddy) reescribe X-Forwarded-For con la IP real del cliente
+    # (CF-Connecting-IP tras Cloudflare, o la IP remota si el peer no es un
+    # proxy confiable). Con NUM_PROXIES=1 DRF usa ese valor como clave de
+    # throttle en vez de la cabecera completa, que cualquiera podía rotar.
+    "NUM_PROXIES": int(os.environ.get("NUM_PROXIES", "1")),
     "DEFAULT_THROTTLE_RATES": {
         "anon": "30/minute",
         "asset_id": "5/minute",

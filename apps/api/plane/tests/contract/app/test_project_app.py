@@ -8,6 +8,7 @@ import uuid
 from django.utils import timezone
 
 from plane.db.models import (
+    DEFAULT_VISIBLE_STATE_NAMES,
     Project,
     ProjectMember,
     ProjectUserProperty,
@@ -91,10 +92,9 @@ class TestProjectAPIPost(TestProjectBase):
 
         # Verify default states were created
         states = State.objects.filter(project=project)
-        assert states.count() == 5
-        expected_states = ["Backlog", "Todo", "In Progress", "Done", "Cancelled"]
+        assert states.count() == len(DEFAULT_VISIBLE_STATE_NAMES)
         state_names = list(states.values_list("name", flat=True))
-        assert set(state_names) == set(expected_states)
+        assert set(state_names) == set(DEFAULT_VISIBLE_STATE_NAMES)
 
     @pytest.mark.django_db
     def test_create_project_with_project_lead(self, session_client, workspace, create_user):
