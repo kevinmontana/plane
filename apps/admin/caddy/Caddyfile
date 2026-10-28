@@ -9,14 +9,23 @@
 :3000 {
 	root * /usr/share/caddy/html
 
-	# Per-client-IP rate limiting for static asset requests
-	rate_limit {
+	# Per-client-IP rate limiting, excluding the hashed build assets.
+	# VTV 2026-10-28: a single page load requests ~125 JS chunks and the build
+	# has ~1200, so limiting /god-mode/assets/* at 300/min made a normal session hit 429
+	# on lazy route chunks; the client treats a failed dynamic import as a
+	# stale deploy and reloads, which loops (blank page that keeps reloading).
+	# Hashed assets are immutable, so they are exempt and cached for a year.
+	@not_build_assets not path /god-mode/assets/*
+	rate_limit @not_build_assets {
 		zone static {
 			key {client_ip}
 			events 300
 			window 1m
 		}
 	}
+
+	@build_assets path /god-mode/assets/*
+	header @build_assets Cache-Control "public, max-age=31536000, immutable"
 
 	# Security headers (HSTS is set at the TLS terminator)
 	header {
