@@ -10,6 +10,8 @@ import type { TSidebarMenuItem } from "./types";
 
 export function useSidebarMenu(): TSidebarMenuItem[] {
   return [
+    coreSidebarMenuLinks.users,
+    coreSidebarMenuLinks.projects,
     coreSidebarMenuLinks.general,
     coreSidebarMenuLinks.email,
     coreSidebarMenuLinks.authentication,

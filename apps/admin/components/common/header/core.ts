@@ -6,14 +6,14 @@
 
 export const CORE_HEADER_SEGMENT_LABELS: Record<string, string> = {
   general: "General",
-  ai: "Artificial Intelligence",
-  email: "Email",
-  authentication: "Authentication",
-  image: "Image",
+  ai: "Inteligencia artificial",
+  email: "Correo",
+  authentication: "Autenticación",
+  image: "Imágenes",
   google: "Google",
   github: "GitHub",
   gitlab: "GitLab",
   gitea: "Gitea",
-  workspace: "Workspace",
-  create: "Create",
+  workspace: "Espacios de trabajo",
+  create: "Crear",
 };

@@ -76,7 +76,7 @@ export const AdminHeader = observer(function AdminHeader() {
             <BreadcrumbList>
               <BreadcrumbItem>
                 <BreadcrumbLink
-                  label="Settings"
+                  label="Ajustes"
                   icon={<Icon icon={SettingsOutline} tint="tertiary" />}
                   render={<Link href="/general/" />}
                 />

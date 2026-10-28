@@ -18,6 +18,13 @@ from plane.license.api.views import (
     InstanceAdminUserSessionEndpoint,
     InstanceWorkSpaceAvailabilityCheckEndpoint,
     InstanceWorkSpaceEndpoint,
+    InstanceProjectJoinEndpoint,
+    InstanceProjectsEndpoint,
+    InstanceUserDetailEndpoint,
+    InstanceUserResetPasswordEndpoint,
+    InstanceUsersEndpoint,
+    InstanceUserSuperAdminEndpoint,
+    InstanceWorkspaceOptionsEndpoint,
 )
 
 urlpatterns = [
@@ -71,4 +78,20 @@ urlpatterns = [
         name="instance-workspace-availability",
     ),
     path("workspaces/", InstanceWorkSpaceEndpoint.as_view(), name="instance-workspace"),
+    # VTV super admin (God Mode): users and projects of the whole instance
+    path("users/", InstanceUsersEndpoint.as_view(), name="instance-users"),
+    path("users/<uuid:pk>/", InstanceUserDetailEndpoint.as_view(), name="instance-user-detail"),
+    path(
+        "users/<uuid:pk>/reset-password/",
+        InstanceUserResetPasswordEndpoint.as_view(),
+        name="instance-user-reset-password",
+    ),
+    path(
+        "users/<uuid:pk>/super-admin/",
+        InstanceUserSuperAdminEndpoint.as_view(),
+        name="instance-user-super-admin",
+    ),
+    path("workspace-options/", InstanceWorkspaceOptionsEndpoint.as_view(), name="instance-workspace-options"),
+    path("projects/", InstanceProjectsEndpoint.as_view(), name="instance-projects"),
+    path("projects/<uuid:pk>/join/", InstanceProjectJoinEndpoint.as_view(), name="instance-project-join"),
 ]

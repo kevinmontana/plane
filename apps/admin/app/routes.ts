@@ -13,6 +13,9 @@ export default [
     route("general", "./(all)/(dashboard)/general/page.tsx"),
     route("workspace", "./(all)/(dashboard)/workspace/page.tsx"),
     route("workspace/create", "./(all)/(dashboard)/workspace/create/page.tsx"),
+    // VTV súper administrador
+    route("users", "./(all)/(dashboard)/users/page.tsx"),
+    route("projects", "./(all)/(dashboard)/projects/page.tsx"),
     route("email", "./(all)/(dashboard)/email/page.tsx"),
     route("authentication", "./(all)/(dashboard)/authentication/page.tsx"),
     route("authentication/github", "./(all)/(dashboard)/authentication/github/page.tsx"),

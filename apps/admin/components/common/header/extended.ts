@@ -4,4 +4,8 @@
  * See the LICENSE file for details.
  */
 
-export const EXTENDED_HEADER_SEGMENT_LABELS: Record<string, string> = {};
+export const EXTENDED_HEADER_SEGMENT_LABELS: Record<string, string> = {
+  // VTV súper administrador
+  users: "Usuarios",
+  projects: "Proyectos",
+};

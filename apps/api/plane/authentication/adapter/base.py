@@ -22,7 +22,7 @@ from zxcvbn import zxcvbn
 from plane.bgtasks.user_activation_email_task import user_activation_email
 
 # Module imports
-from plane.db.models import FileAsset, Profile, User, WorkspaceMemberInvite
+from plane.db.models import FileAsset, Profile, User
 from plane.license.utils.instance_value import get_configuration_value
 from plane.settings.storage import S3Storage
 from plane.utils.exception_logger import log_exception
@@ -108,8 +108,10 @@ class Adapter:
         ])
 
         # Check if sign up is disabled and invite is present or not
-        if ENABLE_SIGNUP == "0" and not WorkspaceMemberInvite.objects.filter(email=email).exists():
-            self.logger.warning("Sign up is disabled and invite is not present")
+        # VTV: with sign-up disabled, accounts are created only by super admins in
+        # God Mode; a workspace invite no longer lets an unknown email self-register.
+        if ENABLE_SIGNUP == "0":
+            self.logger.warning("Sign up is disabled; accounts are created by super admins")
             # Raise exception
             raise AuthenticationException(
                 error_code=AUTHENTICATION_ERROR_CODES["SIGNUP_DISABLED"],

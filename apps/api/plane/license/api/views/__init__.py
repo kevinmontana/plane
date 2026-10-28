@@ -26,3 +26,14 @@ from .workspace import (
     InstanceWorkSpaceAvailabilityCheckEndpoint,
     InstanceWorkSpaceEndpoint,
 )
+
+
+from .super_admin import (
+    InstanceProjectJoinEndpoint,
+    InstanceProjectsEndpoint,
+    InstanceUserDetailEndpoint,
+    InstanceUserResetPasswordEndpoint,
+    InstanceUsersEndpoint,
+    InstanceUserSuperAdminEndpoint,
+    InstanceWorkspaceOptionsEndpoint,
+)
